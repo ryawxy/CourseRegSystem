@@ -20,10 +20,10 @@ public class Literature extends Faculty{
 
     @Override
     public void initialCourses() {
-        Course course1 = new GeneralCourse("1361","10:20Wed","02.22","English Literature","F.B",150,3,"general");
-        Course course2 = new CoreCourse("2323","12:00Sun","02.10","Creative Writing","H.M",30,3,"core");
-        Course course3 = new CoreCourse("4231","8:00Wed","03.09","Philosophy","A.C",50,4,"core");
-        Course course4 = new CoreCourse("2121","16:00Sat","03.04","Modern Poetry","S.R",50,3,"core");
+        Course course1 = new GeneralCourse("1361","10:20Wed","02.22","English Literature","F.B",3,"general","Literature");
+        Course course2 = new CoreCourse("2323","12:00Sun","02.10","Creative Writing","H.M",3,"core","Literature");
+        Course course3 = new CoreCourse("4231","8:00Wed","03.09","Philosophy","A.C",4,"core","Literature");
+        Course course4 = new CoreCourse("2121","16:00Sat","03.04","Modern Poetry","S.R",3,"core","Literature");
         artCourse.add(course1);
         storage.put(course1,150);
         artCourse.add(course2);

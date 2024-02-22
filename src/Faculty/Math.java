@@ -19,10 +19,10 @@ public class Math extends Faculty{
 
     @Override
     public void initialCourses() {
-        Course course1 = new GeneralCourse("2401","10:30Mon","03.24","Calculus I","A.B",200,4,"general");
-        Course course2 = new CoreCourse("4502","15:00Sat","03.19","Linear Algebra","K.P",60,3,"core");
-        Course course3 = new CoreCourse("2312","16:00Wed","03.15","Topology I","L.C",50,4,"core");
-        Course course4 = new CoreCourse("7237","9:00Mon","03.17","Complex Analysis I","C.S",50,4,"core");
+        Course course1 = new GeneralCourse("2401","10:30Mon","03.24","Calculus I","A.B",4,"general","Math");
+        Course course2 = new CoreCourse("4502","15:00Sat","03.19","Linear Algebra","K.P",3,"core","Math");
+        Course course3 = new CoreCourse("2312","16:00Wed","03.15","Topology I","L.C",4,"core","Math");
+        Course course4 = new CoreCourse("7237","9:00Mon","03.17","Complex Analysis I","C.S",4,"core","Math");
       mathCourse.add(course1);
       storage.put(course1,200);
         mathCourse.add(course2);

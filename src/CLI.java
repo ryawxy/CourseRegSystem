@@ -33,7 +33,8 @@ public class CLI {
     }
 
     public void init() {
-        if(currentUser == null) {
+
+        if(currentUser == null || sc.next().equals("back to first page.")) {
             System.out.println("Welcome to the course registration system!\nChoose an option.");
             System.out.println("1-Login as student");
             System.out.println("2-Sign-up as student");
@@ -166,8 +167,32 @@ public class CLI {
                             init();
                     }
                     break;
-
+                    //remove-course
                 case "2" :
+                        if(currentUser.getRegisteredCourses().isEmpty()){
+                            System.out.println("No courses have been registered.");
+                        }else{
+                            for (Course course : currentUser.getRegisteredCourses()) {
+                                if (course.getFaculty().equals("Math")) {
+                                    Math math = new Math();
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" +math.getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Physics")) {
+                                    Physics physics = new Physics();
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" +physics.getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Art")) {
+                                    Art art = new Art();
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" +art.getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Literature")) {
+                                    Literature literature = new Literature();
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" +literature.getStorage().get(course));
+                                }
+                            }
+                        }
+                        break;
+
 
 
 
@@ -177,7 +202,80 @@ public class CLI {
 
             }
         }
+        //add-course
+        if(studentLevel==2 && currentUser.getUserType().equals(UserType.STUDENT)){
+            System.out.println("Choose a Course to register.");
+            String chosenCourse = sc.next();
+            int num = Integer.parseInt(chosenCourse)-1;
+            if(math2==1) {
+                Math math = new Math();
+                if(!currentUser.getRegisteredCourses().isEmpty()) {
+                    for (Course course : currentUser.getRegisteredCourses())
+                        if (!course.getExamTime().equals(math.getMathCourses().get(num).getExamTime()) && !course.getClassTime().equals(math.getMathCourses().get(num).getClassTime()) && !course.getName().equals(math.getMathCourses().get(num).getName())&& math.getStorage().get(course)>0) {
+                            currentUser.addCourse(math.getMathCourses().get(num));
 
+                            System.out.println("Added successfully.");
+                        }else{
+                            System.out.println("Can't add this course.Please try again.");
+                        }
+                }
+                if(currentUser.getRegisteredCourses().isEmpty()){
+                    currentUser.addCourse(math.getMathCourses().get(num));
+                    System.out.println("Added successfully.");
+                }
+            } else if (physics2==1) {
+                Physics physics = new Physics();
+                if(!currentUser.getRegisteredCourses().isEmpty()) {
+                    for (Course course : currentUser.getRegisteredCourses())
+                        if (!course.getExamTime().equals(physics.getPhysicsCourses().get(num).getExamTime()) && !course.getClassTime().equals(physics.getPhysicsCourses().get(num).getClassTime()) && !course.getName().equals(physics.getPhysicsCourses().get(num).getName()) && physics.getStorage().get(course) > 0) {
+                            currentUser.addCourse(physics.getPhysicsCourses().get(num));
+
+                            System.out.println("Added successfully.");
+                        } else {
+                            System.out.println("Can't add this course.Please try again.");
+                        }
+                }
+                if(currentUser.getRegisteredCourses().isEmpty()){
+                    currentUser.addCourse(physics.getPhysicsCourses().get(num));
+                    System.out.println("Added successfully.");
+                }
+            } else if (art2==1) {
+                Art art = new Art();
+                if(!currentUser.getRegisteredCourses().isEmpty()) {
+                    for (Course course : currentUser.getRegisteredCourses())
+                        if (!course.getExamTime().equals(art.getArtCourses().get(num).getExamTime()) && !course.getClassTime().equals(art.getArtCourses().get(num).getClassTime()) && !course.getName().equals(art.getArtCourses().get(num).getName()) && art.getStorage().get(course) > 0) {
+                            currentUser.addCourse(art.getArtCourses().get(num));
+
+                            System.out.println("Added successfully.");
+                        } else {
+                            System.out.println("Can't add this course.Please try again.");
+                        }
+                }
+                if(currentUser.getRegisteredCourses().isEmpty()){
+                    currentUser.addCourse(art.getArtCourses().get(num));
+                    System.out.println("Added successfully.");
+                }
+
+            } else if (literature2==1) {
+                Literature literature = new Literature();
+                if(!currentUser.getRegisteredCourses().isEmpty()) {
+                    for (Course course : currentUser.getRegisteredCourses())
+                        if (!course.getExamTime().equals(literature.getLiteratureCourses().get(num).getExamTime()) && !course.getClassTime().equals(literature.getLiteratureCourses().get(num).getClassTime()) && !course.getName().equals(literature.getLiteratureCourses().get(num).getName()) && literature.getStorage().get(course) > 0) {
+                            currentUser.addCourse(literature.getLiteratureCourses().get(num));
+
+                            System.out.println("Added successfully.");
+                        } else {
+                            System.out.println("Can't add this course.Please try again.");
+                        }
+                }
+                if(currentUser.getRegisteredCourses().isEmpty()){
+                    currentUser.addCourse(literature.getLiteratureCourses().get(num));
+                    System.out.println("Added successfully.");
+                }
+            }
+            init();
+
+        }
 
     }
 }
