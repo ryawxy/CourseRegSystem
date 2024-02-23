@@ -11,6 +11,7 @@ public class Math extends Faculty{
     private static final List<Course> mathCourse = new ArrayList<>();
 
     private static final HashMap<Course,Integer> storage = new HashMap<>();
+    private static final Math math = new Math();
 
 
     public Math() {
@@ -39,4 +40,9 @@ public class Math extends Faculty{
     public HashMap<Course, Integer> getStorage() {
         return storage;
     }
+
+    public static Math getMath(){
+        return math;
+    }
 }
+

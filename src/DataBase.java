@@ -26,5 +26,7 @@ public class DataBase {
         LoggedInUser = loggedInUser;
     }
 
-
+public boolean alreadyExists(String studentNumber){
+        return users.containsKey(studentNumber);
+}
 }

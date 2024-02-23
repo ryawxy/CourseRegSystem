@@ -13,6 +13,8 @@ public class Art extends Faculty {
 
     private static final HashMap<Course,Integer> storage = new HashMap<>();
 
+    private static final Art art = new Art();
+
 
     public Art() {
         initialCourses();
@@ -37,7 +39,11 @@ public class Art extends Faculty {
         return artCourse;
     }
 
-    public HashMap<Course, Integer> getStorage() {
+    public  HashMap<Course, Integer> getStorage() {
         return storage;
+    }
+
+    public static Art getArt(){
+        return art;
     }
 }
