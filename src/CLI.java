@@ -17,19 +17,15 @@ public class CLI {
     private int studentLevel = 0;
     private int adminLevel = 0;
 
-    private int math2 = 0;
-
-    private int physics2 = 0;
-
-    private int art2 = 0;
-
-    private int literature2 = 0;
-
     private int level = 0;
 
     private int level2 = 0;
 
-    private final int level3 = 0;
+    private int level3 = 0;
+
+    private int level4 = 0;
+
+    private int level5 = 0;
 
     private User currentUser = null;
 
@@ -171,9 +167,16 @@ public class CLI {
         if (studentLevel == 1) {
             assert currentUser != null;
             if (currentUser.getUserType().equals(UserType.STUDENT)) {
+                String option = "";
                 if (level == 1) {
-                    System.out.println("choose an option\n1-List of all courses\n2-List of registered courses");
-                    String option = sc.next();
+                    if(level3 == 0) {
+                        System.out.println("choose an option\n1-List of all courses\n2-List of registered courses");
+                         option = sc.next();
+                    }
+                    if (level3==1){
+                        option = "1";
+                    }
+
 
                     switch (option) {
                         case "1":
@@ -181,6 +184,7 @@ public class CLI {
 
 
                             level++;
+                            level3 = 1;
                             level2++;
 
                             break;
@@ -233,6 +237,9 @@ public class CLI {
 
                         default:
                             System.out.println("Invalid input.Please try again.");
+                            level = 1;
+                            studentLevel = 1;
+
                             init();
                     }
                 }
@@ -254,7 +261,7 @@ public class CLI {
                         currentFaculty = Math.getMath();
 
                         studentLevel++;
-                        math2++;
+
                         level++;
                         break;
 
@@ -267,7 +274,7 @@ public class CLI {
 
                         currentFaculty = Physics.getPhysics();
                         studentLevel++;
-                        physics2++;
+
                         level++;
                         break;
 
@@ -279,7 +286,7 @@ public class CLI {
 
                         currentFaculty = Art.getArt();
                         studentLevel++;
-                        art2++;
+
                         level++;
                         break;
 
@@ -291,12 +298,14 @@ public class CLI {
 
                         currentFaculty = Literature.getLiterature();
                         studentLevel++;
-                        literature2++;
+
                         level++;
                         break;
 
                     case "back":
-                        level--;
+                        level=1;
+                        studentLevel = 1;
+                        level3 = 0;
                         init();
                         break;
 
@@ -312,6 +321,8 @@ public class CLI {
 
                     default:
                         System.out.println("Invalid input.Please try again.");
+                        studentLevel = 1;
+                        level = 1;
                         init();
 
                 }
@@ -332,10 +343,6 @@ public class CLI {
                         if (chosenCourse.equals("back")) {
                             level = 1;
                             studentLevel = 1;
-                            math2--;
-                            physics2--;
-                            art2--;
-                            literature2--;
                             currentFaculty = null;
                             init();
 
@@ -344,10 +351,6 @@ public class CLI {
                             level = 0;
                             studentLevel = 0;
                             currentUser = null;
-                            math2 = 0;
-                            physics2 = 0;
-                            art2 = 0;
-                            literature2 = 0;
                             currentCourse=null;
                             currentFaculty = null;
                             init();
@@ -530,8 +533,19 @@ public class CLI {
         if (adminLevel == 2 && level == 2) {
             assert currentUser != null;
             if (currentUser.getUserType().equals(UserType.ADMIN)) {
-                System.out.println("Choose an option:\n1-Add course\n2-Remove course\n3-Choose course\n4-Add storage to a course");
-                String option = sc.next();
+                String option = "";
+                if(level5 == 0) {
+                    System.out.println("Choose an option:\n1-Add course\n2-Remove course\n3-Choose course\n4-Add storage to a course");
+                     option = sc.next();
+                }
+                if(level5 ==1){
+                    option ="1";
+                }
+                if(level5 ==4){
+                    option ="4";
+                }
+
+
 
                 if(option.equals("back")){
                     adminLevel =1;
@@ -545,130 +559,186 @@ public class CLI {
                     init();
                 }
 
+                String code = "";
+                String name = "";
+                String type = "";
+                String tName = "";
+                String cTime = "";
+                String eTime = "";
+                String storage = "";
+                String credit = "";
+
 
                 switch (option) {
+
                     case "1":
-                        System.out.println("Please enter code of the course.");
-                        String code = sc.next();
+                        level5 = 1;
+                        if(level4 == 0) {
+                            System.out.println("Please enter code of the course.");
+                             code = sc.next();
+                            level4 = 1;
 
-                        if(code.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
+                            if (code.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level5 = 0;
+                                init();
+                            }
+                            if (code.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                currentUser = null;
+                                level5= 0;
+                                init();
+                            }
                         }
-                        if(code.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
+                        if(level4 ==1) {
+
+                            System.out.println("Please enter name of the course.");
+                             name = sc.next();
+                            level4 = 2;
+
+                            if (name.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 0;
+
+                                init();
+                            }
+                            if (name.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                currentUser = null;
+                                level5 = 0;
+                                level4 = 0;
+                                init();
+                            }
                         }
+                        if(level4 == 2) {
 
-                        System.out.println("Please enter name of the course.");
-                        String name = sc.next();
+                            System.out.println("Please enter type of the course.");
+                             type = sc.next();
+                            level4 = 3;
 
-                        if(name.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
+                            if (type.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 1;
+                                init();
+                            }
+                            if (type.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                currentUser = null;
+                                level4 = 0;
+                                level5 = 0;
+                                init();
+                            }
                         }
-                        if(code.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
+                        if(level4 == 3) {
+
+                            System.out.println("Please enter teachers name of the course.");
+                             tName = sc.next();
+                            level4 = 4;
+
+                            if (tName.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 2;
+                                init();
+                            }
+                            if (tName.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                currentUser = null;
+                                level4 = 0;
+                                level5 = 0;
+                                init();
+                            }
                         }
+                        if(level4 == 4) {
 
-                        System.out.println("Please enter type of the course.");
-                        String type = sc.next();
+                            System.out.println("Please enter class time of the course.");
+                             cTime = sc.next();
+                            level4 = 5;
 
-                        if(type.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
+                            if (cTime.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 3;
+                                init();
+                            }
+                            if (cTime.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                currentUser = null;
+                                level5 = 0;
+                                level4 = 0;
+                                init();
+                            }
                         }
-                        if(type.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
+                        if(level4 == 5) {
+
+                            System.out.println("Please enter exam time of the course.");
+                             eTime = sc.next();
+                            level4 = 6;
+
+                            if (eTime.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 4;
+                                init();
+                            }
+                            if (eTime.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                level4 = 0;
+                                level5 = 0;
+                                currentUser = null;
+                                init();
+                            }
                         }
+                        if(level4 ==6) {
 
+                            System.out.println("Please enter storage of the course.");
+                            storage = sc.next();
+                            level4 = 7;
 
-
-
-                        System.out.println("Please enter teachers name of the course.");
-                        String tName = sc.next();
-
-                        if(tName.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
+                            if (storage.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 5;
+                                init();
+                            }
+                            if (storage.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                level4 = 0;
+                                level5 = 0;
+                                currentUser = null;
+                                init();
+                            }
                         }
-                        if(tName.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
-                        }
+                        if(level4 ==7) {
 
-                        System.out.println("Please enter class time of the course.");
-                        String cTime = sc.next();
+                            System.out.println("Please enter credit of the course.");
+                             credit = sc.next();
+                            level4 = 8;
 
-                        if(cTime.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
-                        }
-                        if(cTime.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
-                        }
-
-                        System.out.println("Please enter exam time of the course.");
-                        String eTime = sc.next();
-
-                        if(eTime.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
-                        }
-                        if(eTime.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
-                        }
-
-                        System.out.println("Please enter storage of the course.");
-                        String storage = sc.next();
-
-                        if(storage.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
-                        }
-                        if(code.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
-                        }
-
-                        System.out.println("Please enter credit of the course.");
-                        String credit = sc.next();
-
-                        if(credit.equals("back")){
-                            adminLevel =1;
-                            level = 1;
-                            init();
-                        }
-                        if(credit.equals("exit")){
-                            adminLevel =0;
-                            level = 0;
-                            currentUser = null;
-                            init();
+                            if (credit.equals("back")) {
+                                adminLevel = 2;
+                                level = 2;
+                                level4 = 6;
+                                init();
+                            }
+                            if (credit.equals("exit")) {
+                                adminLevel = 0;
+                                level = 0;
+                                level4 = 0;
+                                level5 = 0;
+                                currentUser = null;
+                                init();
+                            }
                         }
 
                         dataBase.addCourse(code, type, tName, cTime, eTime, storage, credit, currentFaculty, name);
@@ -677,18 +747,20 @@ public class CLI {
 
 
                     case "2" :
+
                         System.out.println("Please choose a course to remove.");
                         String chosenCourse1 = sc.next();
 
                         if(chosenCourse1.equals("back")){
-                            adminLevel =1;
-                            level = 1;
+                            adminLevel =2;
+                            level = 2;
                             init();
                         }
                         if(chosenCourse1.equals("exit")){
                             adminLevel =0;
                             level = 0;
                             currentUser = null;
+                            level5 = 0;
                             init();
                         }
                         Course course = Math.getMath().getMathCourses().get(Integer.parseInt(chosenCourse1)-1);
@@ -698,12 +770,13 @@ public class CLI {
 
 
                     case "3":
+
                         System.out.println("Choose a course to see the details.");
                         String chosenCourse = sc.next();
                         currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
                         if(chosenCourse.equals("back")){
-                            adminLevel = 1;
-                            level = 1;
+                            adminLevel = 2;
+                            level = 2;
                             init();
                         }
                         if(chosenCourse.equals("exit")){
@@ -712,6 +785,7 @@ public class CLI {
                             currentCourse = null;
                             currentUser = null;
                             currentFaculty = null;
+                            level5 = 0;
                             init();
                         }
 
@@ -728,23 +802,25 @@ public class CLI {
                         String chosenCourse2 = sc.next();
 
                         if(chosenCourse2.equals("back")){
-                            adminLevel =1;
-                            level = 1;
+                            adminLevel =2;
+                            level = 2;
                             init();
                         }
                         if(chosenCourse2.equals("exit")){
                             adminLevel =0;
                             level = 0;
                             currentUser = null;
+                            level5 = 0;
                             init();
                         }
 
                         Course course1 = dataBase.findCourse(currentFaculty,chosenCourse2);
                         System.out.println("please enter the number of storage you want to add.");
+                        level5 = 4;
                         String num = sc.next();
                         if(num.equals("back")){
-                            adminLevel =1;
-                            level = 1;
+                            adminLevel =2;
+                            level = 2;
                             init();
                         }
                         if(num.equals("exit")){
@@ -775,6 +851,7 @@ public class CLI {
                         currentUser = null;
                         currentFaculty = null;
                         currentCourse=null;
+                        level5 = 0;
                         init();
                     default:
                         System.out.println("Invalid input. Please try again.");
@@ -795,8 +872,8 @@ public class CLI {
                         String studentNum = sc.next();
 
                         if(studentNum.equals("back")){
-                            adminLevel =2;
-                            level = 2;
+                            adminLevel =3;
+                            level = 3;
                             init();
                         }
                         if(studentNum.equals("exit")){
@@ -823,8 +900,8 @@ public class CLI {
                         String studentNum2 = sc.next();
 
                         if(studentNum2.equals("back")){
-                            adminLevel =2;
-                            level = 2;
+                            adminLevel =3;
+                            level = 3;
                             init();
                         }
                         if(studentNum2.equals("exit")){
@@ -856,6 +933,8 @@ public class CLI {
                 }
             }
         }
+        level4 = 0;
+        level5 = 0;
         init();
     }
 }

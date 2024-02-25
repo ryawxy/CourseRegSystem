@@ -281,8 +281,19 @@ public class DataBase {
     public boolean regRules(User user, Course course){
        int sum = 0;
        boolean valid = true;
+        boolean valid2 = true;
+        boolean valid3 = course.getStorage(course)>0;
+        boolean valid4 = true;
+        boolean valid5 = true;
+       boolean valid6 = true;
+       for(Course course1 : user.getRegisteredCourses()){
+           if(course1.equals(course)){
+               System.out.println("Already registered this course.");
+               valid6 = false;
+           }
+       }
 
-
+       if(valid6){
         for(Course course1 : user.getRegisteredCourses()){
              sum += course1.getCredit();
         }
@@ -291,26 +302,22 @@ public class DataBase {
             System.out.println("Cant have more courses.");
         }
 
-        boolean valid2 = true;
+
         for(Course course1 : user.getRegisteredCourses()) {
             if (course1.getClassTime().equals(course.getClassTime())) {
-                if(!course.equals(course1))
                 valid2 = false;
                 System.out.println("Cant add this course.Another class on this time. ");
                 break;
             }
         }
 
-            boolean valid3 = course.getStorage(course)>0;
         if(!valid3){
             System.out.println("There is no storage for this course.");
         }
 
-
-        boolean valid4 = true;
         int sum2 = 0;
         for(Course course1 : user.getRegisteredCourses()) {
-            if(!course.equals(course1))
+
             if (course1.getType().equals("general")) {
                 sum2 += course1.getCredit();
             }
@@ -322,17 +329,18 @@ public class DataBase {
             }
         }
 
-        boolean valid5 = true;
+
         for(Course course1 : user.getRegisteredCourses()) {
-            if(!course.equals(course1))
-            if (course1.getExamTime().equals(course.getExamTime())) {
-                valid5 = false;
-                System.out.println("Cant add this course.Another exam on this time. ");
-                break;
-            }
+            if (!course.equals(course1))
+                if (course1.getExamTime().equals(course.getExamTime())) {
+                    valid5 = false;
+                    System.out.println("Cant add this course.Another exam on this time. ");
+                    break;
+                }
+        }
         }
 
-        return valid && valid2 && valid3 && valid4 && valid5;
+        return valid && valid2 && valid3 && valid4 && valid5 && valid6;
     }
     public String toString(Faculty faculty){
         if (faculty.equals(Math.getMath())){
