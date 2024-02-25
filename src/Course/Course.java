@@ -4,36 +4,31 @@ import Faculty.Art;
 import Faculty.Literature;
 import Faculty.Math;
 import Faculty.Physics;
+import User.User;
 
-import java.util.AbstractList;
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-public abstract class Course {
+import java.util.List;
 
 
-private String code;
+public  class Course {
 
-private String classTime;
+private final String code;
 
-private String examTime;
+private final String classTime;
 
-private String name;
+private final String examTime;
 
-private String teacher;
+private final String name;
 
-//private int storage;
+private final String teacher;
 
-private int credit;
+private final int credit;
 
-private String type;
+private final String type;
 
-private String faculty;
+private final String faculty;
 
-private final static AbstractMap<String,Integer> CoursesStorage = new HashMap<>();
-
-private final static AbstractList<Course> courses = new ArrayList<Course>();
+private final List<User> registeredUsers = new ArrayList<>();
 
     public Course( String code, String classTime, String examTime, String name, String teacher, int credit,String type,String faculty) {
         this.code = code;
@@ -41,7 +36,6 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
         this.examTime = examTime;
         this.name = name;
         this.teacher = teacher;
-   //     this.storage = storage;
         this.credit = credit;
         this.type = type;
         this.faculty = faculty;
@@ -67,16 +61,9 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
         return teacher;
     }
 
-//    public int getStorage() {
-//        return storage;
-//    }
 
     public int getCredit() {
         return credit;
-    }
-
-    public AbstractMap<String, Integer> getCoursesStorage() {
-        return CoursesStorage;
     }
 
     public String getType() {
@@ -88,18 +75,17 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
     }
 
     public int getStorage(Course course){
-        if(course.getFaculty().equals("Math")){
-            return Math.getMath().getStorage().get(course);
-        }
-        else if(course.getFaculty().equals("Physics")){
-            return Physics.getPhysics().getStorage().get(course);
-        }
-        else if(course.getFaculty().equals("Art")){
-            return Art.getArt().getStorage().get(course);
-        }
-        else if(course.getFaculty().equals("Literature")){
-            return Literature.getLiterature().getStorage().get(course);
-        }
-        return 0;
+        return switch (course.getFaculty()) {
+            case "Math" -> Math.getMath().getStorage().get(course);
+            case "Physics" -> Physics.getPhysics().getStorage().get(course);
+            case "Art" -> Art.getArt().getStorage().get(course);
+            case "Literature" -> Literature.getLiterature().getStorage().get(course);
+            default -> 0;
+        };
     }
+    public List<User> getRegisteredUsers(){
+        return registeredUsers;
+    }
+
+
 }

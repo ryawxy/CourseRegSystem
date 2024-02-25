@@ -1,6 +1,7 @@
 package Faculty;
 
 import Course.CoreCourse;
+
 import Course.Course;
 import Course.GeneralCourse;
 
@@ -12,7 +13,6 @@ public class Math extends Faculty{
 
     private static final HashMap<Course,Integer> storage = new HashMap<>();
     private static final Math math = new Math();
-
 
     public Math() {
         initialCourses();
@@ -37,7 +37,7 @@ public class Math extends Faculty{
         return mathCourse;
     }
 
-    public HashMap<Course, Integer> getStorage() {
+    public static HashMap<Course, Integer> getStorage() {
         return storage;
     }
 

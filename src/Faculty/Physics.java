@@ -1,7 +1,8 @@
 package Faculty;
 
-import Course.Course;
 import Course.CoreCourse;
+
+import Course.Course;
 import Course.GeneralCourse;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Physics extends Faculty {
         return physicsCourse;
     }
 
-    public HashMap<Course, Integer> getStorage() {
+    public static HashMap<Course, Integer> getStorage() {
         return storage;
     }
 

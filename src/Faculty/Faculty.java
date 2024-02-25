@@ -1,8 +1,6 @@
 package Faculty;
 
-import Course.CoreCourse;
 import Course.Course;
-import Course.GeneralCourse;
 
 import java.util.AbstractList;
 import java.util.AbstractMap;
