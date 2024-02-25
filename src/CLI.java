@@ -532,31 +532,144 @@ public class CLI {
             if (currentUser.getUserType().equals(UserType.ADMIN)) {
                 System.out.println("Choose an option:\n1-Add course\n2-Remove course\n3-Choose course\n4-Add storage to a course");
                 String option = sc.next();
+
+                if(option.equals("back")){
+                    adminLevel =1;
+                    level = 1;
+                    init();
+                }
+                if(option.equals("exit")){
+                    adminLevel =0;
+                    level = 0;
+                    currentUser = null;
+                    init();
+                }
+
+
                 switch (option) {
                     case "1":
                         System.out.println("Please enter code of the course.");
                         String code = sc.next();
 
+                        if(code.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(code.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
                         System.out.println("Please enter name of the course.");
                         String name = sc.next();
+
+                        if(name.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(code.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
 
                         System.out.println("Please enter type of the course.");
                         String type = sc.next();
 
+                        if(type.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(type.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
+
+
+
                         System.out.println("Please enter teachers name of the course.");
                         String tName = sc.next();
+
+                        if(tName.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(tName.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
 
                         System.out.println("Please enter class time of the course.");
                         String cTime = sc.next();
 
+                        if(cTime.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(cTime.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
                         System.out.println("Please enter exam time of the course.");
                         String eTime = sc.next();
 
+                        if(eTime.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(eTime.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
                         System.out.println("Please enter storage of the course.");
-                        int storage = sc.nextInt();
+                        String storage = sc.next();
+
+                        if(storage.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(code.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
 
                         System.out.println("Please enter credit of the course.");
-                        int credit = sc.nextInt();
+                        String credit = sc.next();
+
+                        if(credit.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(credit.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
 
                         dataBase.addCourse(code, type, tName, cTime, eTime, storage, credit, currentFaculty, name);
                         System.out.println("Course:"+name+"created successfully.");
@@ -566,6 +679,18 @@ public class CLI {
                     case "2" :
                         System.out.println("Please choose a course to remove.");
                         String chosenCourse1 = sc.next();
+
+                        if(chosenCourse1.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(chosenCourse1.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
                         Course course = Math.getMath().getMathCourses().get(Integer.parseInt(chosenCourse1)-1);
                         dataBase.removeCourse(Math.getMath(),course);
                         System.out.println("Course removed successfully.");
@@ -601,12 +726,41 @@ public class CLI {
                     case "4" :
                         System.out.println("Choose a course to add storage to.");
                         String chosenCourse2 = sc.next();
+
+                        if(chosenCourse2.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(chosenCourse2.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
                         Course course1 = dataBase.findCourse(currentFaculty,chosenCourse2);
                         System.out.println("please enter the number of storage you want to add.");
                         String num = sc.next();
-                        int add = Integer.parseInt(num);
-                        dataBase.addStorage(currentFaculty,course1,add);
-                        System.out.println("Storage added successfully.");
+                        if(num.equals("back")){
+                            adminLevel =1;
+                            level = 1;
+                            init();
+                        }
+                        if(num.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
+                        try {
+                            int add = Integer.parseInt(num);
+                            dataBase.addStorage(currentFaculty, course1, add);
+                            System.out.println("Storage added successfully.");
+                        }catch (NumberFormatException e){
+
+                        }
                         break;
 
                     case "back":
@@ -639,6 +793,18 @@ public class CLI {
                     case "1":
                         System.out.println("Enter the student number.");
                         String studentNum = sc.next();
+
+                        if(studentNum.equals("back")){
+                            adminLevel =2;
+                            level = 2;
+                            init();
+                        }
+                        if(studentNum.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
                         if(dataBase.getUsers().containsKey(studentNum)) {
                             User user = dataBase.findStudent(studentNum);
                             if(dataBase.regRules(user,currentCourse)) {
@@ -655,6 +821,19 @@ public class CLI {
                     case "2" :
                         System.out.println("Enter the student number.");
                         String studentNum2 = sc.next();
+
+                        if(studentNum2.equals("back")){
+                            adminLevel =2;
+                            level = 2;
+                            init();
+                        }
+                        if(studentNum2.equals("exit")){
+                            adminLevel =0;
+                            level = 0;
+                            currentUser = null;
+                            init();
+                        }
+
                       User user2 = dataBase.findStudent(studentNum2);
                       dataBase.removeStudent(user2,currentCourse);
                       break;

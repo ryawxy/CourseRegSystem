@@ -46,33 +46,37 @@ public class DataBase {
         return users.containsKey(studentNumber);
     }
 
-    public void addCourse(String code, String type, String tName, String cTime, String eTime, int storage, int credit, Faculty faculty, String name) {
-        if (faculty.equals(Math.getMath())) {
-            Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Math");
-            Math.getMath().getMathCourses().add(course);
-            Math.getStorage().put(course, storage);
+    public void addCourse(String code, String type, String tName, String cTime, String eTime, String storage, String credit, Faculty faculty, String name) {
+        try {
+            if (faculty.equals(Math.getMath())) {
+                Course course = new Course(code, cTime, eTime, name, tName, Integer.parseInt(credit), type, "Math");
+                Math.getMath().getMathCourses().add(course);
+                Math.getStorage().put(course, Integer.parseInt(storage));
 
 
-        } else if (faculty.equals(Physics.getPhysics())) {
-            Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Physics");
-            Physics.getPhysics().getPhysicsCourses().add(course);
-            Physics.getStorage().put(course, storage);
+            } else if (faculty.equals(Physics.getPhysics())) {
+                Course course = new Course(code, cTime, eTime, name, tName, Integer.parseInt(credit), type, "Physics");
+                Physics.getPhysics().getPhysicsCourses().add(course);
+                Physics.getStorage().put(course, Integer.parseInt(storage));
 
 
-        } else if (faculty.equals(Art.getArt())) {
-            Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Art");
-            Art.getArt().getArtCourses().add(course);
-            Art.getStorage().put(course, storage);
+            } else if (faculty.equals(Art.getArt())) {
+                Course course = new Course(code, cTime, eTime, name, tName, Integer.parseInt(credit), type, "Art");
+                Art.getArt().getArtCourses().add(course);
+                Art.getStorage().put(course, Integer.parseInt(storage));
 
 
-        } else if (faculty.equals(Literature.getLiterature())) {
-            Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Literature");
-            Literature.getLiterature().getLiteratureCourses().add(course);
-            Literature.getStorage().put(course, storage);
+            } else if (faculty.equals(Literature.getLiterature())) {
+                Course course = new Course(code, cTime, eTime, name, tName, Integer.parseInt(credit), type, "Literature");
+                Literature.getLiterature().getLiteratureCourses().add(course);
+                Literature.getStorage().put(course, Integer.parseInt(storage));
 
+
+            }
+
+        }catch (NumberFormatException e){
 
         }
-
     }
 
     public String showDetails(Faculty faculty, String index) {
@@ -277,6 +281,8 @@ public class DataBase {
     public boolean regRules(User user, Course course){
        int sum = 0;
        boolean valid = true;
+
+
         for(Course course1 : user.getRegisteredCourses()){
              sum += course1.getCredit();
         }
