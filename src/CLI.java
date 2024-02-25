@@ -28,7 +28,7 @@ public class CLI {
 
     private int level2 = 0;
 
-    private int level3 = 0;
+    private final int level3 = 0;
 
     private User currentUser = null;
 
@@ -461,71 +461,74 @@ public class CLI {
 
 
         }
-        if (level == 2 && studentLevel == 5 && currentUser.getUserType().equals(UserType.STUDENT)) {
-            System.out.println("Choose a course to remove from registered courses.");
-            String removedCourse = sc.next();
-            try {
-                if (removedCourse.equals("back")) {
-                    level = 1;
-                    studentLevel = 1;
-                    currentFaculty = null;
-                    init();
-                }
-                if (removedCourse.equals("exit")) {
-                    level = 0;
-                    studentLevel = 0;
-                    currentFaculty = null;
-                    currentUser = null;
-                    init();
-                }
-                int num = Integer.parseInt(removedCourse);
-                if (num <= currentUser.getRegisteredCourses().size()) {
-                    System.out.println("Course.Course:" + currentUser.getRegisteredCourses().get(num - 1).getName() + " removed successfully.");
-                    currentUser.removeCourse(currentUser.getRegisteredCourses().get(num - 1), currentUser);
-                    System.out.println("Updated version of registered courses:");
-                    if (!currentUser.getRegisteredCourses().isEmpty()) {
-                        for (Course course : currentUser.getRegisteredCourses()) {
-                            if (course.getFaculty().equals("Math")) {
+        if (level == 2 && studentLevel == 5) {
+            assert currentUser != null;
+            if (currentUser.getUserType().equals(UserType.STUDENT)) {
+                System.out.println("Choose a course to remove from registered courses.");
+                String removedCourse = sc.next();
+                try {
+                    if (removedCourse.equals("back")) {
+                        level = 1;
+                        studentLevel = 1;
+                        currentFaculty = null;
+                        init();
+                    }
+                    if (removedCourse.equals("exit")) {
+                        level = 0;
+                        studentLevel = 0;
+                        currentFaculty = null;
+                        currentUser = null;
+                        init();
+                    }
+                    int num = Integer.parseInt(removedCourse);
+                    if (num <= currentUser.getRegisteredCourses().size()) {
+                        System.out.println("Course.Course:" + currentUser.getRegisteredCourses().get(num - 1).getName() + " removed successfully.");
+                        currentUser.removeCourse(currentUser.getRegisteredCourses().get(num - 1), currentUser);
+                        System.out.println("Updated version of registered courses:");
+                        if (!currentUser.getRegisteredCourses().isEmpty()) {
+                            for (Course course : currentUser.getRegisteredCourses()) {
+                                if (course.getFaculty().equals("Math")) {
 
-                                System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Math" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Math.getMath().getStorage().get(course));
-                            }
-                            if (course.getFaculty().equals("Physics")) {
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Math" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Math.getMath().getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Physics")) {
 
-                                System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Physics" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Physics.getPhysics().getStorage().get(course));
-                            }
-                            if (course.getFaculty().equals("Art")) {
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Physics" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Physics.getPhysics().getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Art")) {
 
-                                System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Art" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Art.getArt().getStorage().get(course));
-                            }
-                            if (course.getFaculty().equals("Literature")) {
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Art" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Art.getArt().getStorage().get(course));
+                                }
+                                if (course.getFaculty().equals("Literature")) {
 
-                                System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Literature" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Literature.getLiterature().getStorage().get(course));
+                                    System.out.println((currentUser.getRegisteredCourses().indexOf(course) + 1) + "-" + "Faculty:Literature" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Literature.getLiterature().getStorage().get(course));
+                                }
                             }
+                        } else {
+                            System.out.println("No course has been registered.");
                         }
                     } else {
-                        System.out.println("No course has been registered.");
+                        System.out.println("Invalid input.Please try again.");
                     }
-                } else {
-                    System.out.println("Invalid input.Please try again.");
-                }
 
-            } catch (NumberFormatException e) {
-                if (removedCourse.equals("back")) {
-                    level = 1;
-                    studentLevel = 1;
-                    currentFaculty = null;
-                    init();
-                }
-                if (removedCourse.equals("exit")) {
-                    level = 0;
-                    studentLevel = 0;
-                    currentFaculty = null;
-                    currentUser = null;
-                    init();
-                }
+                } catch (NumberFormatException e) {
+                    if (removedCourse.equals("back")) {
+                        level = 1;
+                        studentLevel = 1;
+                        currentFaculty = null;
+                        init();
+                    }
+                    if (removedCourse.equals("exit")) {
+                        level = 0;
+                        studentLevel = 0;
+                        currentFaculty = null;
+                        currentUser = null;
+                        init();
+                    }
 
+                }
+                init();
             }
-            init();
         }
         if (adminLevel == 1 && level == 1 && currentUser.getUserType().equals(UserType.ADMIN)) {
             System.out.println("Choose a faculty\n1-Math\n2-Physics\n3-Art\n4-Literature");
@@ -634,7 +637,7 @@ public class CLI {
                         int credit = sc.nextInt();
 
                         dataBase.addCourse(code, type, tName, cTime, eTime, storage, credit, currentFaculty, name);
-                        System.out.println("Course.Course created successfully.");
+                        System.out.println("Course:"+name+"created successfully.");
 
 
                     case "2" :
@@ -650,13 +653,16 @@ public class CLI {
                         String chosenCourse = sc.next();
                         currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
                         System.out.println("List of registered students for this course:");
+                        if(currentCourse.getRegisteredUsers().isEmpty()){
+                            System.out.println("No student has registered this course.");
+                        }
                         System.out.println(dataBase.showDetails(currentFaculty, chosenCourse));
                         adminLevel++;
                         level++;
                         break;
 
                     case "4" :
-                        System.out.println("Choose a course to add storage.");
+                        System.out.println("Choose a course to add storage to.");
                         String chosenCourse2 = sc.next();
                         Course course1 = dataBase.findCourse(currentFaculty,chosenCourse2);
                         System.out.println("please enter the number of storage you want to add.");
