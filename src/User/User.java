@@ -1,6 +1,7 @@
 package User;
 
 import Course.Course;
+import DataBase.DataBase;
 import Faculty.Art;
 import Faculty.Literature;
 import Faculty.Math;
@@ -12,6 +13,7 @@ public class User {
     private final String username;
 
     private final UserType userType;
+
 
    private final ArrayList<Course> registeredCourses = new ArrayList<Course>();
 
@@ -37,7 +39,10 @@ public class User {
     }
 
     public void addCourse(Course course,User user){
+        int index =  DataBase.getRegisteredUsers().indexOf(user);
+
         registeredCourses.add(course);
+
         course.getRegisteredUsers().add(user);
         if(course.getFaculty().equals("Math")){
 
