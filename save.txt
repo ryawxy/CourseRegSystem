@@ -1,0 +1,170 @@
+4
+4
+4
+4
+2401
+10:30Mon
+03.24
+Calculus I
+A.B
+4
+general
+Math
+199
+123/
+4502
+15:00Sat
+03.19
+Linear Algebra
+K.P
+3
+core
+Math
+59
+402131241/
+2312
+16:00Wed
+03.15
+Topology I
+L.C
+4
+core
+Math
+50
+n
+7237
+9:00Mon
+03.17
+Complex Analysis I
+C.S
+4
+core
+Math
+49
+321/
+1243
+10:30Mon
+03.24
+Basic Physics
+F.P
+3
+general
+Physics
+200
+n
+2124
+16:00Sat
+03.18
+Quantum Mechanics
+L.T
+3
+core
+Physics
+60
+n
+4234
+17:00Wed
+03.14
+Biological Physics
+L.C
+3
+core
+Physics
+70
+n
+4567
+9:00Mon
+03.17
+Astronomy
+J.H
+4
+core
+Physics
+59
+123/
+1322
+10:20Sun
+02.24
+History
+F.B
+2
+general
+Art
+150
+n
+2124
+12:00Sat
+02.15
+Fine Arts
+H.P
+4
+core
+Art
+38
+402131241/123/
+4231
+19:00Wed
+03.13
+Graphic Design
+A.A
+3
+core
+Art
+79
+321/
+2112
+9:00Sat
+03.27
+Performing Arts
+J.P
+4
+core
+Art
+70
+n
+1361
+10:20Wed
+02.22
+English Literature
+F.B
+3
+general
+Literature
+149
+402131241/
+2323
+12:00Sun
+02.10
+Creative Writing
+H.M
+3
+core
+Literature
+30
+n
+4231
+8:00Wed
+03.09
+Philosophy
+A.C
+4
+core
+Literature
+50
+n
+2121
+16:00Sat
+03.04
+Modern Poetry
+S.R
+3
+core
+Literature
+50
+n
+123:123
+Calculus I/Astronomy/Fine Arts/
+402131241:1234
+Linear Algebra/English Literature/Fine Arts/
+321:321
+Complex Analysis I/Graphic Design/
