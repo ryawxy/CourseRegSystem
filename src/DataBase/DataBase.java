@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DataBase {
     public DataBase() {
-        initialUsers();
+
     }
 
     private static final HashMap<String, String> users = new HashMap<>();
@@ -74,7 +74,7 @@ public class DataBase {
 
             }
 
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
 
         }
     }
@@ -151,82 +151,115 @@ public class DataBase {
     }
 
     public void removeCourse(Faculty faculty, Course course) {
-        if (faculty.equals(Math.getMath())) {
-            Math.getMath().getMathCourses().remove(course);
-            course.getRegisteredUsers().clear();
+        try {
+            if (course != null) {
+                if (faculty.equals(Math.getMath())) {
+                    Math.getMath().getMathCourses().remove(course);
+                    course.getRegisteredUsers().clear();
 
-            for (User user : registeredUsers) {
-                user.getRegisteredCourses().remove(course);
+
+                    for (User user : registeredUsers) {
+                        user.getRegisteredCourses().remove(course);
+                    }
+
+                } else if (faculty.equals(Physics.getPhysics())) {
+                    Physics.getPhysics().getPhysicsCourses().remove(course);
+                    course.getRegisteredUsers().clear();
+
+                    for (User user : registeredUsers) {
+                        user.getRegisteredCourses().remove(course);
+                    }
+
+                } else if (faculty.equals(Art.getArt())) {
+                    Art.getArt().getArtCourses().remove(course);
+                    course.getRegisteredUsers().clear();
+
+                    for (User user : registeredUsers) {
+                        user.getRegisteredCourses().remove(course);
+                    }
+
+                } else if (faculty.equals(Literature.getLiterature())) {
+                    Literature.getLiterature().getLiteratureCourses().remove(course);
+                    course.getRegisteredUsers().clear();
+
+                    for (User user : registeredUsers) {
+                        user.getRegisteredCourses().remove(course);
+                    }
+
+                }
+                System.out.println("Course removed successfully.");
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid input.Please try again.");
+        }
+    }
+
+    public void addStorage(Faculty faculty, Course course, int number) {
+        if (faculty.equals(Math.getMath())) {
+            int prevStorage = Math.getStorage().get(course);
+            Math.getStorage().replace(course, prevStorage + number);
 
         } else if (faculty.equals(Physics.getPhysics())) {
-            Physics.getPhysics().getPhysicsCourses().remove(course);
-            course.getRegisteredUsers().clear();
-
-            for (User user : registeredUsers) {
-                user.getRegisteredCourses().remove(course);
-            }
+            int prevStorage = Physics.getStorage().get(course);
+            Physics.getStorage().replace(course, prevStorage + number);
 
         } else if (faculty.equals(Art.getArt())) {
-            Art.getArt().getArtCourses().remove(course);
-            course.getRegisteredUsers().clear();
-
-            for (User user : registeredUsers) {
-                user.getRegisteredCourses().remove(course);
-            }
+            int prevStorage = Art.getStorage().get(course);
+            Art.getStorage().replace(course, prevStorage + number);
 
         } else if (faculty.equals(Literature.getLiterature())) {
-            Literature.getLiterature().getLiteratureCourses().remove(course);
-            course.getRegisteredUsers().clear();
-
-            for (User user : registeredUsers) {
-                user.getRegisteredCourses().remove(course);
-            }
-
-        }
-    }
-    public void addStorage(Faculty faculty , Course course,int number){
-        if(faculty.equals(Math.getMath())){
-            int prevStorage = Math.getStorage().get(course);
-          Math.getStorage().replace(course, prevStorage+number);
-
-        } else if(faculty.equals(Physics.getPhysics())){
-            int prevStorage = Physics.getStorage().get(course);
-            Physics.getStorage().replace(course, prevStorage+number);
-
-        }else if(faculty.equals(Art.getArt())){
-            int prevStorage = Art.getStorage().get(course);
-            Art.getStorage().replace(course, prevStorage+number);
-
-        }else if(faculty.equals(Literature.getLiterature())){
             int prevStorage = Literature.getStorage().get(course);
-            Literature.getStorage().replace(course, prevStorage+number);
+            Literature.getStorage().replace(course, prevStorage + number);
         }
 
     }
-    public Course findCourse(Faculty faculty, String number){
+
+    public Course findCourse(Faculty faculty, String number) {
         try {
+            try {
 
 
-            if (faculty.equals(Math.getMath())) {
-                return Math.getMath().getMathCourses().get(Integer.parseInt(number) - 1);
+                try {
+                    if (faculty.equals(Math.getMath())) {
+                        if (Integer.parseInt(number) < Math.getMath().getMathCourses().size()) {
+                            return Math.getMath().getMathCourses().get(Integer.parseInt(number) - 1);
+                        } else {
+                            System.out.println("Invalid input.Please try again.");
+                        }
 
-            } else if (faculty.equals(Physics.getPhysics())) {
-                return Physics.getPhysics().getPhysicsCourses().get(Integer.parseInt(number) - 1);
+                    } else if (faculty.equals(Physics.getPhysics())) {
+                        if (Integer.parseInt(number) < Physics.getPhysics().getPhysicsCourses().size()) {
+                            return Physics.getPhysics().getPhysicsCourses().get(Integer.parseInt(number) - 1);
+                        } else {
+                            System.out.println("Invalid input.Please try again.");
+                        }
+                    } else if (faculty.equals(Art.getArt())) {
+                        if (Integer.parseInt(number) < Art.getArt().getArtCourses().size()) {
+                            return Art.getArt().getArtCourses().get(Integer.parseInt(number) - 1);
+                        } else {
+                            System.out.println("Invalid input.Please try again.");
+                        }
+                    } else if (faculty.equals(Literature.getLiterature())) {
+                        if (Integer.parseInt(number) < Literature.getLiterature().getLiteratureCourses().size()) {
+                            return Literature.getLiterature().getLiteratureCourses().get(Integer.parseInt(number) - 1);
+                        } else {
+                            System.out.println("Invalid input.Please try again.");
+                        }
+                    }
+                } catch (NumberFormatException e) {
 
-            } else if (faculty.equals(Art.getArt())) {
-                return Art.getArt().getArtCourses().get(Integer.parseInt(number) - 1);
 
-            } else if (faculty.equals(Literature.getLiterature())) {
-                return Literature.getLiterature().getLiteratureCourses().get(Integer.parseInt(number) - 1);
-
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid input.Please try again.");
             }
-        }catch (NumberFormatException e){
-
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid input.Please try again.");
         }
         return null;
     }
-    public void addStudent(User user , Course course){
+
+    public void addStudent(User user, Course course) {
         try {
 
 
@@ -244,103 +277,109 @@ public class DataBase {
             } else {
                 user.addCourse(course, user);
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
 
         }
 
 
     }
 
-    public void removeStudent(User user, Course course){
+    public void removeStudent(User user, Course course) {
 
         boolean valid = getRegisteredUsers().contains(user);
 
-        if(valid){
-          if(user.getRegisteredCourses().contains(course)){
-              user.removeCourse(course, user);
-              System.out.println("Chosen student removed from this course successfully.");
-          }else{
-              System.out.println("Chosen student doesn't have this course.");
-          }
-      }
+        if (valid) {
+            if (user.getRegisteredCourses().contains(course)) {
+                user.removeCourse(course, user);
+                System.out.println("Chosen student removed from this course successfully.");
+            } else {
+                System.out.println("Chosen student doesn't have this course.");
+            }
+        }
 
     }
 
-    public User findStudent(String studentNum){
-        for(User user : getRegisteredUsers()){
-            if (user.getUsername().equals(studentNum)){
+    public User findStudent(String studentNum) {
+        for (User user : getRegisteredUsers()) {
+            if (user.getUsername().equals(studentNum)) {
                 return user;
             }
         }
-        if(!getUsers().containsKey(studentNum)){
+        if (!getUsers().containsKey(studentNum)) {
             System.out.println("No such student exist");
         }
         return null;
     }
 
-    public boolean regRules(User user, Course course){
-       int sum = 0;
-       boolean valid = true;
-        boolean valid2 = true;
-        boolean valid3 = course.getStorage(course)>0;
-        boolean valid4 = true;
-        boolean valid5 = true;
-       boolean valid6 = true;
-       for(Course course1 : user.getRegisteredCourses()){
-           if(course1.equals(course)){
-               System.out.println("Already registered this course.");
-               valid6 = false;
-           }
-       }
+    public boolean regRules(User user, Course course) {
+        try {
+            int sum = 0;
+            boolean valid = true;
+            boolean valid2 = true;
 
-       if(valid6){
-        for(Course course1 : user.getRegisteredCourses()){
-             sum += course1.getCredit();
-        }
-        if(sum+course.getCredit()>20){
-            valid = false;
-            System.out.println("Cant have more courses.");
-        }
-
-
-        for(Course course1 : user.getRegisteredCourses()) {
-            if (course1.getClassTime().equals(course.getClassTime())) {
-                valid2 = false;
-                System.out.println("Cant add this course.Another class on this time. ");
-                break;
-            }
-        }
-
-        if(!valid3){
-            System.out.println("There is no storage for this course.");
-        }
-
-        int sum2 = 0;
-        for(Course course1 : user.getRegisteredCourses()) {
-
-            if (course1.getType().equals("general")) {
-                sum2 += course1.getCredit();
-            }
-        }
-        if(course.getType().equals("general")){
-            if(sum2+course.getCredit()>5){
-                valid4 = false;
-                System.out.println("Reached the limit.Cant have more general courses.");
-            }
-        }
-
-
-        for(Course course1 : user.getRegisteredCourses()) {
-            if (!course.equals(course1))
-                if (course1.getExamTime().equals(course.getExamTime())) {
-                    valid5 = false;
-                    System.out.println("Cant add this course.Another exam on this time. ");
-                    break;
+            boolean valid3 = course.getStorage(course) > 0;
+            boolean valid4 = true;
+            boolean valid5 = true;
+            boolean valid6 = true;
+            for (Course course1 : user.getRegisteredCourses()) {
+                if (course1.equals(course)) {
+                    System.out.println("Already registered this course.");
+                    valid6 = false;
                 }
-        }
-        }
+            }
 
-        return valid && valid2 && valid3 && valid4 && valid5 && valid6;
+            if (valid6) {
+                for (Course course1 : user.getRegisteredCourses()) {
+                    sum += course1.getCredit();
+                }
+                if (sum + course.getCredit() > 20) {
+                    valid = false;
+                    System.out.println("Cant have more courses.");
+                }
+
+
+                for (Course course1 : user.getRegisteredCourses()) {
+                    if (course1.getClassTime().equals(course.getClassTime())) {
+                        valid2 = false;
+                        System.out.println("Cant add this course.Another class on this time. ");
+                        break;
+                    }
+                }
+
+                if (!valid3) {
+                    System.out.println("There is no storage for this course.");
+                }
+
+                int sum2 = 0;
+                for (Course course1 : user.getRegisteredCourses()) {
+
+                    if (course1.getType().equals("general")) {
+                        sum2 += course1.getCredit();
+                    }
+                }
+                if (course.getType().equals("general")) {
+                    if (sum2 + course.getCredit() > 5) {
+                        valid4 = false;
+                        System.out.println("Reached the limit.Cant have more general courses.");
+                    }
+                }
+
+
+                for (Course course1 : user.getRegisteredCourses()) {
+                    if (!course.equals(course1))
+                        if (course1.getExamTime().equals(course.getExamTime())) {
+                            valid5 = false;
+                            System.out.println("Cant add this course.Another exam on this time. ");
+                            break;
+                        }
+                }
+            }
+
+            return valid && valid2 && valid3 && valid4 && valid5 && valid6;
+        } catch (NullPointerException e) {
+            System.out.println("Invalid input.Please try again.");
+        }
+        return false;
     }
     public String toString(Faculty faculty){
         if (faculty.equals(Math.getMath())){
@@ -353,6 +392,26 @@ public class DataBase {
             return "Literature";
         }
         return  null;
+    }
+    public Course find(String name){
+        for(Course course : Math.getMath().getMathCourses()){
+            if(course.getName().equals(name)){
+                return course;
+            }
+        } for(Course course : Physics.getPhysics().getPhysicsCourses()){
+            if(course.getName().equals(name)){
+                return course;
+            }
+        } for(Course course : Art.getArt().getArtCourses()){
+            if(course.getName().equals(name)){
+                return course;
+            }
+        } for(Course course : Literature.getLiterature().getLiteratureCourses()){
+            if(course.getName().equals(name)){
+                return course;
+            }
+        }
+        return null;
     }
 
 
