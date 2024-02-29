@@ -283,17 +283,25 @@ DataBase dataBase = new DataBase();
                                     Math.getStorage().put(course, Integer.parseInt(storage));
 
                                     if (!user1.equals("n")) {
+                                        boolean valid = true;
                                         for (String users : userNames) {
+                                            for (User user2 : DataBase.getRegisteredUsers()) {
+                                                if(user2.getUsername().equals(users)){
+                                                    valid = false;
+                                                    course.getRegisteredUsers().add(user2);
+                                                }
 
-                                            User user = new User(users, UserType.STUDENT);
-                                            course.getRegisteredUsers().add(user);
-                                         //   user.getRegisteredCourses().add(course);
-                                            DataBase.getRegisteredUsers().add(user);
-
-
-
+                                            }
                                         }
 
+
+                                        if(valid) {
+                                            for (String users : userNames) {
+                                                User user = new User(users, UserType.STUDENT);
+                                                course.getRegisteredUsers().add(user);
+                                                DataBase.getRegisteredUsers().add(user);
+                                            }
+                                        }
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();
