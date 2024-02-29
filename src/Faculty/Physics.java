@@ -20,10 +20,10 @@ public class Physics extends Faculty {
 
     @Override
     public void initialCourses() {
-        Course course1 = new GeneralCourse("1243","10:30Mon","03.24","Basic Physics","F.P",200,3,"general");
-        Course course2 = new CoreCourse("2124","16:00Sat","03.18","Quantum Mechanics","L.T",60,3,"core");
-        Course course3 = new CoreCourse("4234","17:00Wed","03.14","Biological Physics","L.C",70,3,"core");
-        Course course4 = new CoreCourse("4567","9:00Mon","03.17","Astronomy","J.H",60,4,"core");
+        Course course1 = new GeneralCourse("1243","10:30Mon","03.24","Basic Physics","F.P",3,"general","Physics");
+        Course course2 = new CoreCourse("2124","16:00Sat","03.18","Quantum Mechanics","L.T",3,"core","Physics");
+        Course course3 = new CoreCourse("4234","17:00Wed","03.14","Biological Physics","L.C",3,"core","Physics");
+        Course course4 = new CoreCourse("4567","9:00Mon","03.17","Astronomy","J.H",4,"core","Physics");
         physicsCourse.add(course1);
         storage.put(course1,200);
         physicsCourse.add(course2);

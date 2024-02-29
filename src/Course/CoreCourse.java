@@ -2,7 +2,7 @@ package Course;
 
 public class  CoreCourse extends Course {
 
-    public CoreCourse(String code, String classTime, String examTime, String name, String teacher, int storage, int credit,String type) {
-        super(code, classTime, examTime, name, teacher, storage, credit,"core");
+    public CoreCourse(String code, String classTime, String examTime, String name, String teacher, int credit,String type,String faculty) {
+        super(code, classTime, examTime, name, teacher, credit,"core",faculty);
     }
 }

@@ -18,25 +18,28 @@ private String name;
 
 private String teacher;
 
-private int storage;
+//private int storage;
 
 private int credit;
 
 private String type;
 
+private String faculty;
+
 private final static AbstractMap<String,Integer> CoursesStorage = new HashMap<>();
 
 private final static AbstractList<Course> courses = new ArrayList<Course>();
 
-    public Course( String code, String classTime, String examTime, String name, String teacher, int storage, int credit,String type) {
+    public Course( String code, String classTime, String examTime, String name, String teacher, int credit,String type,String faculty) {
         this.code = code;
         this.classTime = classTime;
         this.examTime = examTime;
         this.name = name;
         this.teacher = teacher;
-        this.storage = storage;
+   //     this.storage = storage;
         this.credit = credit;
         this.type = type;
+        this.faculty = faculty;
     }
 
     public String getCode() {
@@ -59,9 +62,9 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
         return teacher;
     }
 
-    public int getStorage() {
-        return storage;
-    }
+//    public int getStorage() {
+//        return storage;
+//    }
 
     public int getCredit() {
         return credit;
@@ -75,4 +78,7 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
         return type;
     }
 
+    public String getFaculty() {
+        return faculty;
+    }
 }
