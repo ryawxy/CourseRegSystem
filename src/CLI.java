@@ -1,10 +1,13 @@
 import Course.Course;
 import DataBase.DataBase;
+import EventListener.EventListener;
 import Faculty.*;
 import Faculty.Math;
 import User.User;
 import User.UserType;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CLI {
@@ -33,12 +36,14 @@ public class CLI {
 
     private Course currentCourse = null;
 
+    private final EventListener eventListener = new EventListener();
+
     public CLI(Logic logic) {
 
         this.logic = logic;
     }
 
-    public void init() {
+    public void init() throws IOException {
 
         if (currentUser == null) {
             if (level == 0) {
@@ -450,7 +455,68 @@ public class CLI {
                 init();
             }
         }
-        if (adminLevel == 1 && level == 1) {
+        if(adminLevel == 1 && level ==1){
+            assert  currentUser != null;
+            if(currentUser.getUserType().equals(UserType.ADMIN)){
+                System.out.println("Choose an option:\n1-Import\n2-Export\n3-Show Faculties");
+                String option = sc.next();
+                switch (option){
+
+                    case "1" :
+                        eventListener.importFile();
+                        System.out.println("Data imported successfully.");
+                        break;
+
+
+
+                    case "2" :
+
+                        System.out.println("Please enter the absolute path of a file. ");
+                        String path = sc.next();
+                        File file = new File(path);
+
+                        if(!file.exists()){
+                            System.out.println("No such file exists.");
+                        }else {
+
+                            eventListener.export(path);
+
+                            System.out.println("Data exported successfully.");
+                        }
+                        break;
+
+
+
+                    case "3" :
+                     adminLevel++;
+                     level++;
+                     init();
+                     break;
+
+                    case "back" :
+                    adminLevel = 0;
+                    level = 0;
+                    currentUser = null;
+                    init();
+
+                    case "exit" :
+                        adminLevel = 0;
+                        level = 0;
+                        currentUser = null;
+                        init();
+
+                    default :
+                        System.out.println("Invalid input.Please try again.");
+                        init();
+                }
+            }
+        }
+
+
+
+
+
+        if (adminLevel == 2 && level == 2) {
             assert currentUser != null;
             if (currentUser.getUserType().equals(UserType.ADMIN)) {
                 System.out.println("Choose a faculty\n1-Math\n2-Physics\n3-Art\n4-Literature");
@@ -504,10 +570,9 @@ public class CLI {
                         break;
 
                     case "back":
-                        level = 0;
-                        adminLevel = 0;
+                        level = 1;
+                        adminLevel = 1;
                         studentLevel = 0;
-                        currentUser = null;
                         init();
                         break;
 
@@ -530,7 +595,7 @@ public class CLI {
                 }
             }
         }
-        if (adminLevel == 2 && level == 2) {
+        if (adminLevel == 3 && level == 3) {
             assert currentUser != null;
             if (currentUser.getUserType().equals(UserType.ADMIN)) {
                 String option = "";
@@ -548,8 +613,8 @@ public class CLI {
 
 
                 if(option.equals("back")){
-                    adminLevel =1;
-                    level = 1;
+                    adminLevel =2;
+                    level = 2;
                     init();
                 }
                 if(option.equals("exit")){
@@ -579,8 +644,8 @@ public class CLI {
                             level4 = 1;
 
                             if (code.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level5 = 0;
                                 init();
                             }
@@ -599,8 +664,8 @@ public class CLI {
                             level4 = 2;
 
                             if (name.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 0;
 
                                 init();
@@ -621,8 +686,8 @@ public class CLI {
                             level4 = 3;
 
                             if (type.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 1;
                                 init();
                             }
@@ -642,8 +707,8 @@ public class CLI {
                             level4 = 4;
 
                             if (tName.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 2;
                                 init();
                             }
@@ -663,8 +728,8 @@ public class CLI {
                             level4 = 5;
 
                             if (cTime.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 3;
                                 init();
                             }
@@ -684,8 +749,8 @@ public class CLI {
                             level4 = 6;
 
                             if (eTime.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 4;
                                 init();
                             }
@@ -705,8 +770,8 @@ public class CLI {
                             level4 = 7;
 
                             if (storage.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 5;
                                 init();
                             }
@@ -726,8 +791,8 @@ public class CLI {
                             level4 = 8;
 
                             if (credit.equals("back")) {
-                                adminLevel = 2;
-                                level = 2;
+                                adminLevel = 3;
+                                level = 3;
                                 level4 = 6;
                                 init();
                             }
@@ -752,8 +817,8 @@ public class CLI {
                         String chosenCourse1 = sc.next();
 
                         if(chosenCourse1.equals("back")){
-                            adminLevel =2;
-                            level = 2;
+                            adminLevel =3;
+                            level = 3;
                             init();
                         }
                         if(chosenCourse1.equals("exit")){
@@ -763,9 +828,10 @@ public class CLI {
                             level5 = 0;
                             init();
                         }
-                        Course course = Math.getMath().getMathCourses().get(Integer.parseInt(chosenCourse1)-1);
-                        dataBase.removeCourse(Math.getMath(),course);
-                        System.out.println("Course removed successfully.");
+                        Course course2 = dataBase.findCourse(currentFaculty , chosenCourse1);
+
+                        dataBase.removeCourse(currentFaculty,course2);
+
                         break;
 
 
@@ -775,8 +841,8 @@ public class CLI {
                         String chosenCourse = sc.next();
                         currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
                         if(chosenCourse.equals("back")){
-                            adminLevel = 2;
-                            level = 2;
+                            adminLevel = 3;
+                            level = 3;
                             init();
                         }
                         if(chosenCourse.equals("exit")){
@@ -802,8 +868,8 @@ public class CLI {
                         String chosenCourse2 = sc.next();
 
                         if(chosenCourse2.equals("back")){
-                            adminLevel =2;
-                            level = 2;
+                            adminLevel =3;
+                            level = 3;
                             init();
                         }
                         if(chosenCourse2.equals("exit")){
@@ -819,8 +885,8 @@ public class CLI {
                         level5 = 4;
                         String num = sc.next();
                         if(num.equals("back")){
-                            adminLevel =2;
-                            level = 2;
+                            adminLevel =3;
+                            level = 3;
                             init();
                         }
                         if(num.equals("exit")){
@@ -840,8 +906,8 @@ public class CLI {
                         break;
 
                     case "back":
-                        adminLevel = 1;
-                        level = 1;
+                        adminLevel = 2;
+                        level = 2;
                         init();
 
                     case "exit":
@@ -860,7 +926,7 @@ public class CLI {
 
             }
         }
-        if(adminLevel == 3 && level == 3) {
+        if(adminLevel == 4 && level == 4) {
             assert currentUser != null;
             if (currentUser.getUserType().equals(UserType.ADMIN)) {
                 System.out.println("Choose an option:\n1-add student\n2-Remove student");
@@ -872,8 +938,8 @@ public class CLI {
                         String studentNum = sc.next();
 
                         if(studentNum.equals("back")){
-                            adminLevel =3;
-                            level = 3;
+                            adminLevel =4;
+                            level = 4;
                             init();
                         }
                         if(studentNum.equals("exit")){
@@ -900,8 +966,8 @@ public class CLI {
                         String studentNum2 = sc.next();
 
                         if(studentNum2.equals("back")){
-                            adminLevel =3;
-                            level = 3;
+                            adminLevel =4;
+                            level = 4;
                             init();
                         }
                         if(studentNum2.equals("exit")){
@@ -926,8 +992,8 @@ public class CLI {
                         init();
 
                     case "back":
-                        adminLevel=2;
-                        level=2;
+                        adminLevel=3;
+                        level=3;
                         init();
 
                 }
