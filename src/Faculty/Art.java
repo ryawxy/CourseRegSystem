@@ -39,7 +39,7 @@ public class Art extends Faculty {
         return artCourse;
     }
 
-    public  HashMap<Course, Integer> getStorage() {
+    public static HashMap<Course, Integer> getStorage() {
         return storage;
     }
 
