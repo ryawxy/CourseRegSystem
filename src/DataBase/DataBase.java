@@ -101,47 +101,69 @@ public class DataBase {
         }
         if (faculty.equals(Physics.getPhysics())) {
 
+            if (faculty.equals(Physics.getPhysics())) {
 
-            List<User> users = new ArrayList<>();
-            users = Physics.getPhysics().getPhysicsCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
-            StringBuilder reg = new StringBuilder();
 
-            for (User students : users) {
+                List<User> users = new ArrayList<>();
+                users = Physics.getPhysics().getPhysicsCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
+                StringBuilder reg = new StringBuilder();
 
-                reg.append(students.getUsername()).append("\n");
+                if (users.isEmpty()) {
+                    return "No student has registered this course.";
+                } else {
 
+                    for (User students : users) {
+
+                        reg.append(students.getUsername()).append("\n");
+
+                    }
+                    return reg.toString();
+                }
             }
-            return reg.toString();
         }
         if (faculty.equals(Art.getArt())) {
 
-
-            List<User> users = new ArrayList<>();
-            users = Art.getArt().getArtCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
-
-            StringBuilder reg = new StringBuilder();
+            if (faculty.equals(Art.getArt())) {
 
 
-            for (User students : users) {
+                List<User> users = new ArrayList<>();
+                users = Art.getArt().getArtCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
+                StringBuilder reg = new StringBuilder();
 
-                reg.append(students.getUsername()).append("\n");
+                if (users.isEmpty()) {
+                    return "No student has registered this course.";
+                } else {
 
+                    for (User students : users) {
+
+                        reg.append(students.getUsername()).append("\n");
+
+                    }
+                    return reg.toString();
+                }
             }
-            return reg.toString();
         }
         if (faculty.equals(Literature.getLiterature())) {
 
+            if (faculty.equals(Literature.getLiterature())) {
 
-            List<User> users = new ArrayList<>();
-            users = Literature.getLiterature().getLiteratureCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
-            StringBuilder reg = new StringBuilder();
 
-            for (User students : users) {
+                List<User> users = new ArrayList<>();
+                users = Literature.getLiterature().getLiteratureCourses().get((Integer.parseInt(index)) - 1).getRegisteredUsers();
+                StringBuilder reg = new StringBuilder();
 
-                reg.append(students.getUsername()).append("\n");
+                if (users.isEmpty()) {
+                    return "No student has registered this course.";
+                } else {
 
+                    for (User students : users) {
+
+                        reg.append(students.getUsername()).append("\n");
+
+                    }
+                    return reg.toString();
+                }
             }
-            return reg.toString();
         }
         return null;
     }
@@ -295,6 +317,9 @@ public class DataBase {
             } else {
                 System.out.println("Chosen student doesn't have this course.");
             }
+        }
+        if(course.getRegisteredUsers().isEmpty()){
+            System.out.println("No student has registered this course.");
         }
 
     }

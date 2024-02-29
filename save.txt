@@ -10,13 +10,8 @@ A.B
 4
 general
 Math
-<<<<<<< HEAD
-200
-n
-=======
-199
-123/
->>>>>>> e08e36d (new feature : import and export created.)
+198
+402131241/123/
 4502
 15:00Sat
 03.19
@@ -25,13 +20,8 @@ K.P
 3
 core
 Math
-<<<<<<< HEAD
 60
 n
-=======
-59
-402131241/
->>>>>>> e08e36d (new feature : import and export created.)
 2312
 16:00Wed
 03.15
@@ -50,13 +40,8 @@ C.S
 4
 core
 Math
-<<<<<<< HEAD
 50
 n
-=======
-49
-321/
->>>>>>> e08e36d (new feature : import and export created.)
 1243
 10:30Mon
 03.24
@@ -95,13 +80,8 @@ J.H
 4
 core
 Physics
-<<<<<<< HEAD
 60
 n
-=======
-59
-123/
->>>>>>> e08e36d (new feature : import and export created.)
 1322
 10:20Sun
 02.24
@@ -110,8 +90,8 @@ F.B
 2
 general
 Art
-150
-n
+149
+1234/
 2124
 12:00Sat
 02.15
@@ -120,13 +100,8 @@ H.P
 4
 core
 Art
-<<<<<<< HEAD
-40
-n
-=======
-38
-402131241/123/
->>>>>>> e08e36d (new feature : import and export created.)
+39
+1234/
 4231
 19:00Wed
 03.13
@@ -135,13 +110,8 @@ A.A
 3
 core
 Art
-<<<<<<< HEAD
 80
 n
-=======
-79
-321/
->>>>>>> e08e36d (new feature : import and export created.)
 2112
 9:00Sat
 03.27
@@ -160,13 +130,8 @@ F.B
 3
 general
 Literature
-<<<<<<< HEAD
 150
 n
-=======
-149
-402131241/
->>>>>>> e08e36d (new feature : import and export created.)
 2323
 12:00Sun
 02.10
@@ -175,8 +140,8 @@ H.M
 3
 core
 Literature
-30
-n
+29
+402131241/
 4231
 8:00Wed
 03.09
@@ -197,14 +162,9 @@ core
 Literature
 50
 n
-<<<<<<< HEAD
 402131241:1234
-n
-=======
+Calculus I/Creative Writing/
 123:123
-Calculus I/Astronomy/Fine Arts/
-402131241:1234
-Linear Algebra/English Literature/Fine Arts/
-321:321
-Complex Analysis I/Graphic Design/
->>>>>>> e08e36d (new feature : import and export created.)
+Calculus I/
+1234:1234
+History/Fine Arts/

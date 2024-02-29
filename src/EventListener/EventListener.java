@@ -285,6 +285,7 @@ DataBase dataBase = new DataBase();
                                     if (!user1.equals("n")) {
                                         boolean valid = true;
                                         for (String users : userNames) {
+                                            valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
                                                 if(user2.getUsername().equals(users)){
                                                     valid = false;
@@ -316,6 +317,7 @@ DataBase dataBase = new DataBase();
                                     if (!user1.equals("n")) {
                                         boolean valid = true;
                                         for (String users : userNames) {
+                                            valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
                                                 if(user2.getUsername().equals(users)){
                                                     valid = false;
@@ -345,6 +347,7 @@ DataBase dataBase = new DataBase();
                                     if (!user1.equals("n")) {
                                         boolean valid = true;
                                         for (String users : userNames) {
+                                            valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
                                                 if(user2.getUsername().equals(users)){
                                                     valid = false;
@@ -374,6 +377,7 @@ DataBase dataBase = new DataBase();
                                     if (!user1.equals("n")) {
                                         boolean valid = true;
                                         for (String users : userNames) {
+                                            valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
                                                 if(user2.getUsername().equals(users)){
                                                     valid = false;
