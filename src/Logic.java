@@ -1,3 +1,5 @@
+import DataBase.DataBase;
+
 public class Logic {
     private final CLI cli;
 

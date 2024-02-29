@@ -1,3 +1,5 @@
+package DataBase;
+
 import Course.Course;
 import Faculty.Faculty;
 import Faculty.Math;
@@ -48,25 +50,25 @@ public class DataBase {
         if (faculty.equals(Math.getMath())) {
             Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Math");
             Math.getMath().getMathCourses().add(course);
-            Math.getMath().getStorage().put(course, storage);
+            Math.getStorage().put(course, storage);
 
 
         } else if (faculty.equals(Physics.getPhysics())) {
             Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Physics");
             Physics.getPhysics().getPhysicsCourses().add(course);
-            Physics.getPhysics().getStorage().put(course, storage);
+            Physics.getStorage().put(course, storage);
 
 
         } else if (faculty.equals(Art.getArt())) {
             Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Art");
             Art.getArt().getArtCourses().add(course);
-            Art.getArt().getStorage().put(course, storage);
+            Art.getStorage().put(course, storage);
 
 
         } else if (faculty.equals(Literature.getLiterature())) {
             Course course = new Course(code, cTime, eTime, name, tName, credit, type, "Literature");
             Literature.getLiterature().getLiteratureCourses().add(course);
-            Literature.getLiterature().getStorage().put(course, storage);
+            Literature.getStorage().put(course, storage);
 
 
         }
@@ -82,7 +84,7 @@ public class DataBase {
             StringBuilder reg = new StringBuilder();
 
             if (users.isEmpty()) {
-                return "No student registered this course.";
+                return "No student has registered this course.";
             } else {
 
                 for (User students : users) {
@@ -212,7 +214,7 @@ public class DataBase {
                 return Art.getArt().getArtCourses().get(Integer.parseInt(number) - 1);
 
             } else if (faculty.equals(Literature.getLiterature())) {
-                return Math.getMath().getMathCourses().get(Integer.parseInt(number) - 1);
+                return Literature.getLiterature().getLiteratureCourses().get(Integer.parseInt(number) - 1);
 
             }
         }catch (NumberFormatException e){
@@ -260,12 +262,6 @@ public class DataBase {
 
     }
 
-
-
-
-
-
-
     public User findStudent(String studentNum){
         for(User user : getRegisteredUsers()){
             if (user.getUsername().equals(studentNum)){
@@ -276,6 +272,73 @@ public class DataBase {
             System.out.println("No such student exist");
         }
         return null;
+    }
+
+    public boolean regRules(User user, Course course){
+       int sum = 0;
+       boolean valid = true;
+        for(Course course1 : user.getRegisteredCourses()){
+             sum += course1.getCredit();
+        }
+        if(sum+course.getCredit()>20){
+            valid = false;
+            System.out.println("Cant have more courses.");
+        }
+
+        boolean valid2 = true;
+        for(Course course1 : user.getRegisteredCourses()) {
+            if (course1.getClassTime().equals(course.getClassTime())) {
+                if(!course.equals(course1))
+                valid2 = false;
+                System.out.println("Cant add this course.Another class on this time. ");
+                break;
+            }
+        }
+
+            boolean valid3 = course.getStorage(course)>0;
+        if(!valid3){
+            System.out.println("There is no storage for this course.");
+        }
+
+
+        boolean valid4 = true;
+        int sum2 = 0;
+        for(Course course1 : user.getRegisteredCourses()) {
+            if(!course.equals(course1))
+            if (course1.getType().equals("general")) {
+                sum2 += course1.getCredit();
+            }
+        }
+        if(course.getType().equals("general")){
+            if(sum2+course.getCredit()>5){
+                valid4 = false;
+                System.out.println("Reached the limit.Cant have more general courses.");
+            }
+        }
+
+        boolean valid5 = true;
+        for(Course course1 : user.getRegisteredCourses()) {
+            if(!course.equals(course1))
+            if (course1.getExamTime().equals(course.getExamTime())) {
+                valid5 = false;
+                System.out.println("Cant add this course.Another exam on this time. ");
+                break;
+            }
+        }
+
+        return valid && valid2 && valid3 && valid4 && valid5;
+    }
+    public String toString(Faculty faculty){
+        if (faculty.equals(Math.getMath())){
+            return "Math";
+        }else if (faculty.equals(Physics.getPhysics())){
+            return "Physics";
+        }else if (faculty.equals(Art.getArt())){
+            return "Art";
+        }else if (faculty.equals(Literature.getLiterature())){
+            return "Literature";
+        }
+        return  null;
     }
 
 

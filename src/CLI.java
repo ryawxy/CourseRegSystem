@@ -1,4 +1,5 @@
 import Course.Course;
+import DataBase.DataBase;
 import Faculty.*;
 import Faculty.Math;
 import User.User;
@@ -56,9 +57,15 @@ public class CLI {
                         System.out.println(dataBase.getUsers());
                         System.out.println("Please enter your student number.");
                         String studentNum = sc.next();
+                        if(studentNum.equals("back") || studentNum.equals("exit")){
+                            init();
+                        }
                         if (dataBase.getUsers().containsKey(studentNum)) {
                             System.out.println("Please enter your password");
                             String password = sc.next();
+                            if(password.equals("back") || password.equals("exit")){
+                                init();
+                            }
                             if (dataBase.getUsers().get(studentNum).equals(password)) {
                                 System.out.println("You logged-in successfully!");
                                 studentLevel++;
@@ -85,6 +92,9 @@ public class CLI {
                     case "2":
                         System.out.println("Please enter your student number.");
                         String studentNumber = sc.next();
+                        if(studentNumber.equals("back") || studentNumber.equals("exit")){
+                            init();
+                        }
                         if (dataBase.alreadyExists(studentNumber)) {
                             System.out.println("You already have an account.Please Login");
                             init();
@@ -93,18 +103,29 @@ public class CLI {
                             System.out.println("Please enter a password");
                             String newPassword = sc.next();
 
+                            if(newPassword.equals("back") || newPassword.equals("exit")){
+                                init();
+                            }
+
                             System.out.println("Please re-enter the password");
                             String newPassword1 = sc.next();
+
+                            if(newPassword1.equals("back") || newPassword1.equals("exit")){
+                                init();
+                            }
+
+
 
                             if (newPassword.equals(newPassword1)) {
                                 System.out.println("You signed up successfully!");
 
                                 dataBase.getUsers().put(studentNumber, newPassword);
-                                DataBase.getRegisteredUsers().add(new User(studentNumber, UserType.STUDENT));
+                                User user2 = new User(studentNumber,UserType.STUDENT);
+                                DataBase.getRegisteredUsers().add(user2);
 
                                 studentLevel++;
                                 level++;
-                                currentUser = new User(studentNumber, UserType.STUDENT);
+                                currentUser = user2;
                                 break;
                             } else {
                                 System.out.println("Invalid inputs.Please try again.");
@@ -114,6 +135,12 @@ public class CLI {
                     case "3":
                         System.out.println("Please enter the password.");
                         String adminPassword = sc.next();
+
+                        if(adminPassword.equals("back") || adminPassword.equals("exit")){
+                            studentLevel=0;
+                            level=0;
+                            init();
+                        }
 
                         User user = new User(adminPassword, UserType.ADMIN);
 
@@ -189,6 +216,8 @@ public class CLI {
                         case "back":
                             currentUser = null;
                             level = 0;
+                            studentLevel = 0;
+
                             init();
 
                             break;
@@ -197,6 +226,7 @@ public class CLI {
                             currentUser = null;
                             studentLevel = 0;
                             level = 0;
+                            currentCourse = null;
                             init();
                             break;
 
@@ -275,6 +305,7 @@ public class CLI {
                         currentUser = null;
                         studentLevel = 0;
                         adminLevel = 0;
+                        currentCourse = null;
                         init();
                         break;
 
@@ -290,176 +321,60 @@ public class CLI {
 
 
         //add-course
-        if (studentLevel == 2 && currentUser.getUserType().equals(UserType.STUDENT)) {
-            System.out.println("Choose a Course.Course to register.");
-            String chosenCourse = sc.next();
-            if (level == 3) {
-                try {
+        if (studentLevel == 2) {
+            assert currentUser != null;
+            if (currentUser.getUserType().equals(UserType.STUDENT)) {
+                System.out.println("Choose a Course to register.");
+                String chosenCourse = sc.next();
+                if (level == 3) {
+                    try {
 
-                    if (chosenCourse.equals("back")) {
-                        level = 1;
-                        studentLevel = 1;
-                        math2--;
-                        physics2--;
-                        art2--;
-                        literature2--;
-                        currentFaculty = null;
-                        init();
+                        if (chosenCourse.equals("back")) {
+                            level = 1;
+                            studentLevel = 1;
+                            math2--;
+                            physics2--;
+                            art2--;
+                            literature2--;
+                            currentFaculty = null;
+                            init();
+
+                        }
+                        if (chosenCourse.equals("exit")) {
+                            level = 0;
+                            studentLevel = 0;
+                            currentUser = null;
+                            math2 = 0;
+                            physics2 = 0;
+                            art2 = 0;
+                            literature2 = 0;
+                            currentCourse=null;
+                            currentFaculty = null;
+                            init();
+                        }
+                        Course course = dataBase.findCourse(currentFaculty, chosenCourse);
+                        if (dataBase.regRules(currentUser, course)) {
+                            currentUser.addCourse(course, currentUser);
+
+                            System.out.println("Course added successfully");
+                        }
+
+
+                    } catch (NumberFormatException e) {
+                        if (chosenCourse.equals("back")) {
+                            level = 2;
+                            studentLevel = 1;
+                            init();
+                        }
 
                     }
-                    if (chosenCourse.equals("exit")) {
-                        level = 0;
-                        studentLevel = 0;
-                        currentUser = null;
-                        math2 = 0;
-                        physics2 = 0;
-                        art2 = 0;
-                        literature2 = 0;
-                        init();
-                    }
 
-
-                    if (currentFaculty.equals(Math.getMath())) {
-
-                        int num = Integer.parseInt(chosenCourse) - 1;
-                        if (!currentUser.getRegisteredCourses().isEmpty()) {
-                            boolean valid = true;
-
-                            for (Course course : currentUser.getRegisteredCourses()) {
-
-                                if (course.getExamTime().equals(Math.getMath().getMathCourses().get(num).getExamTime()) || course.getClassTime().equals(Math.getMath().getMathCourses().get(num).getClassTime()) || course.getName().equals(Math.getMath().getMathCourses().get(num).getName()) || course.getStorage(course) <= 0) {
-
-                                    valid = false;
-                                }
-                            }
-                            Course course2 = Math.getMath().getMathCourses().get(num);
-
-                            if (valid) {
-                                currentUser.addCourse(course2, currentUser);
-
-
-                                System.out.println("Added successfully.");
-
-
-                            } else {
-                                System.out.println("Can't add this course.Please try again.");
-                            }
-                        }
-
-                        if (currentUser.getRegisteredCourses().isEmpty()) {
-                            Course course2 = Math.getMath().getMathCourses().get(num);
-
-                            currentUser.addCourse(course2, currentUser);
-
-                            System.out.println("Added successfully.");
-
-                        }
-
-                    } else if (currentFaculty.equals(Physics.getPhysics())) {
-                        int num = Integer.parseInt(chosenCourse) - 1;
-
-                        boolean valid = true;
-
-
-                        if (!currentUser.getRegisteredCourses().isEmpty()) {
-                            for (Course course : currentUser.getRegisteredCourses()) {
-                                if (course.getExamTime().equals(Physics.getPhysics().getPhysicsCourses().get(num).getExamTime()) || course.getClassTime().equals(Physics.getPhysics().getPhysicsCourses().get(num).getClassTime()) || course.getName().equals(Physics.getPhysics().getPhysicsCourses().get(num).getName()) || course.getStorage(course) <= 0) {
-                                    valid = false;
-                                }
-                            }
-                            if (valid) {
-                                Course course2 = Physics.getPhysics().getPhysicsCourses().get(num);
-                                currentUser.addCourse(course2, currentUser);
-
-                                System.out.println("Added successfully.");
-
-
-                            } else {
-                                System.out.println("Can't add this course.Please try again.");
-                            }
-                        }
-                        if (currentUser.getRegisteredCourses().isEmpty()) {
-                            Course course2 = Physics.getPhysics().getPhysicsCourses().get(num);
-                            currentUser.addCourse(course2, currentUser);
-                            System.out.println("Added successfully.");
-
-                        }
-                    } else if (currentFaculty.equals(Art.getArt())) {
-                        int num = Integer.parseInt(chosenCourse) - 1;
-
-                        boolean valid = true;
-
-                        if (!currentUser.getRegisteredCourses().isEmpty()) {
-
-                            for (Course course : currentUser.getRegisteredCourses()) {
-
-
-                                if (course.getExamTime().equals(Art.getArt().getArtCourses().get(num).getExamTime()) || course.getClassTime().equals(Art.getArt().getArtCourses().get(num).getClassTime()) || course.getName().equals(Art.getArt().getArtCourses().get(num).getName()) || course.getStorage(course) <= 0) {
-
-                                    valid = false;
-                                }
-                            }
-                            if (valid) {
-                                Course course2 = Art.getArt().getArtCourses().get(num);
-                                currentUser.addCourse(course2, currentUser);
-
-                                System.out.println("Added successfully.");
-
-                            } else {
-                                System.out.println("Can't add this course.Please try again.");
-                            }
-                        }
-                        if (currentUser.getRegisteredCourses().isEmpty()) {
-                            Course course2 = Art.getArt().getArtCourses().get(num);
-                            currentUser.addCourse(course2, currentUser);
-                            System.out.println("Added successfully.");
-
-                        }
-
-                    } else if (currentFaculty.equals(Literature.getLiterature())) {
-
-                        int num = Integer.parseInt(chosenCourse) - 1;
-
-                        if (!currentUser.getRegisteredCourses().isEmpty()) {
-                            boolean valid = true;
-                            for (Course course : currentUser.getRegisteredCourses()) {
-                                if (course.getExamTime().equals(Literature.getLiterature().getLiteratureCourses().get(num).getExamTime()) || course.getClassTime().equals(Literature.getLiterature().getLiteratureCourses().get(num).getClassTime()) || course.getName().equals(Literature.getLiterature().getLiteratureCourses().get(num).getName()) || course.getStorage(course) <= 0) {
-
-                                    valid = false;
-                                }
-                            }
-                            if (valid) {
-                                Course course2 = Literature.getLiterature().getLiteratureCourses().get(num);
-                                currentUser.addCourse(course2, currentUser);
-
-                                System.out.println("Added successfully.");
-
-                            } else {
-                                System.out.println("Can't add this course.Please try again.");
-                            }
-                        }
-                        if (currentUser.getRegisteredCourses().isEmpty()) {
-                            Course course2 = Literature.getLiterature().getLiteratureCourses().get(num);
-                            currentUser.addCourse(course2, currentUser);
-                            System.out.println("Added successfully.");
-
-                        }
-                    }
-
-
-                } catch (NumberFormatException e) {
-                    if (chosenCourse.equals("back")) {
-                        level = 2;
-                        studentLevel = 1;
-                        init();
-                    }
+                    init();
 
                 }
-                init();
+
 
             }
-
-
         }
         if (level == 2 && studentLevel == 5) {
             assert currentUser != null;
@@ -478,6 +393,7 @@ public class CLI {
                         studentLevel = 0;
                         currentFaculty = null;
                         currentUser = null;
+                        currentCourse=null;
                         init();
                     }
                     int num = Integer.parseInt(removedCourse);
@@ -523,6 +439,7 @@ public class CLI {
                         studentLevel = 0;
                         currentFaculty = null;
                         currentUser = null;
+                        currentCourse = null;
                         init();
                     }
 
@@ -530,79 +447,84 @@ public class CLI {
                 init();
             }
         }
-        if (adminLevel == 1 && level == 1 && currentUser.getUserType().equals(UserType.ADMIN)) {
-            System.out.println("Choose a faculty\n1-Math\n2-Physics\n3-Art\n4-Literature");
+        if (adminLevel == 1 && level == 1) {
+            assert currentUser != null;
+            if (currentUser.getUserType().equals(UserType.ADMIN)) {
+                System.out.println("Choose a faculty\n1-Math\n2-Physics\n3-Art\n4-Literature");
 
-            String faculty = sc.next();
+                String faculty = sc.next();
 
-            switch (faculty) {
-                case "1":
+                switch (faculty) {
+                    case "1":
 
-                    for (Course course : Math.getMath().getMathCourses()) {
-                        System.out.println((Math.getMath().getMathCourses().indexOf(course) + 1) + "-" + "Faculty:Math" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Math.getMath().getStorage().get(course));
-                    }
+                        for (Course course : Math.getMath().getMathCourses()) {
+                            System.out.println((Math.getMath().getMathCourses().indexOf(course) + 1) + "-" + "Faculty:Math" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Math.getMath().getStorage().get(course));
+                        }
 
-                    currentFaculty = Math.getMath();
-                    adminLevel++;
-                    level++;
-                    break;
-
-
-                case "2":
-
-                    for (Course course : Physics.getPhysics().getPhysicsCourses()) {
-                        System.out.println((Physics.getPhysics().getPhysicsCourses().indexOf(course) + 1) + "-" + "Faculty:Physics" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Physics.getPhysics().getStorage().get(course));
-                    }
-
-                    currentFaculty = Physics.getPhysics();
-                    adminLevel++;
-                    level++;
-                    break;
-
-                case "3":
-
-                    for (Course course : Art.getArt().getArtCourses()) {
-                        System.out.println((Art.getArt().getArtCourses().indexOf(course) + 1) + "-" + "Faculty:Art" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Art.getArt().getStorage().get(course));
-                    }
-
-                    currentFaculty = Art.getArt();
-                    adminLevel++;
-                    level++;
-                    break;
-
-                case "4":
-
-                    for (Course course : Literature.getLiterature().getLiteratureCourses()) {
-                        System.out.println((Literature.getLiterature().getLiteratureCourses().indexOf(course) + 1) + "-" + "Faculty:Literature" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Literature.getLiterature().getStorage().get(course));
-                    }
-
-                    currentFaculty = Literature.getLiterature();
-                    adminLevel++;
-                    level++;
-                    break;
-
-                case "back":
-                    level = 0;
-                    adminLevel = 0;
-                    studentLevel = 0;
-                    currentUser = null;
-                    init();
-                    break;
-
-                case "exit":
-                    level = 0;
-                    currentUser = null;
-                    studentLevel = 0;
-                    adminLevel = 0;
-                    init();
-                    break;
+                        currentFaculty = Math.getMath();
+                        adminLevel++;
+                        level++;
+                        break;
 
 
-                default:
-                    System.out.println("Invalid input.Please try again.");
-                    init();
+                    case "2":
+
+                        for (Course course : Physics.getPhysics().getPhysicsCourses()) {
+                            System.out.println((Physics.getPhysics().getPhysicsCourses().indexOf(course) + 1) + "-" + "Faculty:Physics" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Physics.getPhysics().getStorage().get(course));
+                        }
+
+                        currentFaculty = Physics.getPhysics();
+                        adminLevel++;
+                        level++;
+                        break;
+
+                    case "3":
+
+                        for (Course course : Art.getArt().getArtCourses()) {
+                            System.out.println((Art.getArt().getArtCourses().indexOf(course) + 1) + "-" + "Faculty:Art" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Art.getArt().getStorage().get(course));
+                        }
+
+                        currentFaculty = Art.getArt();
+                        adminLevel++;
+                        level++;
+                        break;
+
+                    case "4":
+
+                        for (Course course : Literature.getLiterature().getLiteratureCourses()) {
+                            System.out.println((Literature.getLiterature().getLiteratureCourses().indexOf(course) + 1) + "-" + "Faculty:Literature" + "/Subject:" + course.getName() + "/Code:" + course.getCode() + "/Type:" + course.getType() + "/Class Time:" + course.getClassTime() + "/Credit:" + course.getCredit() + "/Teachers Name:" + course.getTeacher() + "/Exam Time:" + course.getExamTime() + "/Storage:" + Literature.getLiterature().getStorage().get(course));
+                        }
+
+                        currentFaculty = Literature.getLiterature();
+                        adminLevel++;
+                        level++;
+                        break;
+
+                    case "back":
+                        level = 0;
+                        adminLevel = 0;
+                        studentLevel = 0;
+                        currentUser = null;
+                        init();
+                        break;
+
+                    case "exit":
+                        level = 0;
+                        currentUser = null;
+                        studentLevel = 0;
+                        adminLevel = 0;
+                        currentCourse = null;
+                        currentFaculty = null;
+                        init();
+                        break;
 
 
+                    default:
+                        System.out.println("Invalid input.Please try again.");
+                        init();
+
+
+                }
             }
         }
         if (adminLevel == 2 && level == 2) {
@@ -638,6 +560,7 @@ public class CLI {
 
                         dataBase.addCourse(code, type, tName, cTime, eTime, storage, credit, currentFaculty, name);
                         System.out.println("Course:"+name+"created successfully.");
+                        break;
 
 
                     case "2" :
@@ -646,16 +569,30 @@ public class CLI {
                         Course course = Math.getMath().getMathCourses().get(Integer.parseInt(chosenCourse1)-1);
                         dataBase.removeCourse(Math.getMath(),course);
                         System.out.println("Course removed successfully.");
+                        break;
 
 
                     case "3":
                         System.out.println("Choose a course to see the details.");
                         String chosenCourse = sc.next();
                         currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
-                        System.out.println("List of registered students for this course:");
-                        if(currentCourse.getRegisteredUsers().isEmpty()){
-                            System.out.println("No student has registered this course.");
+                        if(chosenCourse.equals("back")){
+                            adminLevel = 1;
+                            level = 1;
+                            init();
                         }
+                        if(chosenCourse.equals("exit")){
+                            adminLevel = 0;
+                            level = 0;
+                            currentCourse = null;
+                            currentUser = null;
+                            currentFaculty = null;
+                            init();
+                        }
+
+
+                        System.out.println("List of registered students for this course:");
+
                         System.out.println(dataBase.showDetails(currentFaculty, chosenCourse));
                         adminLevel++;
                         level++;
@@ -683,6 +620,7 @@ public class CLI {
                         adminLevel = 0;
                         currentUser = null;
                         currentFaculty = null;
+                        currentCourse=null;
                         init();
                     default:
                         System.out.println("Invalid input. Please try again.");
@@ -703,11 +641,11 @@ public class CLI {
                         String studentNum = sc.next();
                         if(dataBase.getUsers().containsKey(studentNum)) {
                             User user = dataBase.findStudent(studentNum);
-
-
-                            dataBase.addStudent(user, currentCourse);
-                            System.out.println("Chosen student added to this course successfully.");
-                            break;
+                            if(dataBase.regRules(user,currentCourse)) {
+                                dataBase.addStudent(user, currentCourse);
+                                System.out.println("Chosen student added to this course successfully.");
+                                break;
+                            }
                         }else{
                             System.out.println("No such student exist.");
                         }
@@ -727,6 +665,8 @@ public class CLI {
                         currentUser=null;
                         level=0;
                         studentLevel=0;
+                        currentCourse=null;
+                        currentFaculty = null;
                         init();
 
                     case "back":
