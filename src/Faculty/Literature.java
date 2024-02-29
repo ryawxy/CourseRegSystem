@@ -13,6 +13,8 @@ public class Literature extends Faculty{
 
     private static final HashMap<Course,Integer> storage = new HashMap<>();
 
+    private static final Literature literature = new Literature();
+
 
     public Literature() {
         initialCourses();
@@ -39,5 +41,9 @@ public class Literature extends Faculty{
 
     public HashMap<Course, Integer> getStorage() {
         return storage;
+    }
+
+    public static Literature getLiterature(){
+        return literature;
     }
 }

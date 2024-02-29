@@ -35,26 +35,28 @@ public class User {
     }
 
     public void addCourse(Course course){
+        registeredCourses.add(course);
         if(course.getFaculty().equals("Math")){
-            Math math = new Math();
-            int newStorage = math.getStorage().get(course)-1;
 
-            math.getStorage().replace(course,newStorage);
+            int newStorage = Math.getMath().getStorage().get(course)-1;
+
+            Math.getMath().getStorage().replace(course,newStorage);
 
         }
-        registeredCourses.add(course);
-
         if(course.getFaculty().equals("Physics")){
-            Physics physics = new Physics();
-            physics.getStorage().replace(course,physics.getStorage().get(course)-1);
+            int newStorage = Physics.getPhysics().getStorage().get(course)-1;
+
+            Physics.getPhysics().getStorage().replace(course,newStorage);
         }
         if(course.getFaculty().equals("Art")){
-            Art art = new Art();
-            art.getStorage().replace(course,art.getStorage().get(course)-1);
+            int newStorage = Art.getArt().getStorage().get(course)-1;
+
+            Art.getArt().getStorage().replace(course,newStorage);
         }
         if(course.getFaculty().equals("Literature")){
-            Literature literature = new Literature();
-            literature.getStorage().replace(course,literature.getStorage().get(course)-1);
+            int newStorage = Literature.getLiterature().getStorage().get(course)-1;
+
+            Literature.getLiterature().getStorage().replace(course,newStorage);
         }
 
     }

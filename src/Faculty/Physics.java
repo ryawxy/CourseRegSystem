@@ -13,6 +13,7 @@ public class Physics extends Faculty {
 
     private static final HashMap<Course,Integer> storage = new HashMap<>();
 
+    private static final Physics physics = new Physics();
 
     public Physics() {
         initialCourses();
@@ -40,4 +41,9 @@ public class Physics extends Faculty {
     public HashMap<Course, Integer> getStorage() {
         return storage;
     }
+
+    public static Physics getPhysics(){
+        return physics;
+    }
 }
+

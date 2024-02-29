@@ -1,5 +1,10 @@
 package Course;
 
+import Faculty.Art;
+import Faculty.Literature;
+import Faculty.Math;
+import Faculty.Physics;
+
 import java.util.AbstractList;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -80,5 +85,21 @@ private final static AbstractList<Course> courses = new ArrayList<Course>();
 
     public String getFaculty() {
         return faculty;
+    }
+
+    public int getStorage(Course course){
+        if(course.getFaculty().equals("Math")){
+            return Math.getMath().getStorage().get(course);
+        }
+        else if(course.getFaculty().equals("Physics")){
+            return Physics.getPhysics().getStorage().get(course);
+        }
+        else if(course.getFaculty().equals("Art")){
+            return Art.getArt().getStorage().get(course);
+        }
+        else if(course.getFaculty().equals("Literature")){
+            return Literature.getLiterature().getStorage().get(course);
+        }
+        return 0;
     }
 }
