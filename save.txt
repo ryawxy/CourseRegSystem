@@ -10,8 +10,8 @@ A.B
 4
 general
 Math
-198
-402131241/123/
+200
+n
 4502
 15:00Sat
 03.19
@@ -90,8 +90,8 @@ F.B
 2
 general
 Art
-149
-1234/
+150
+n
 2124
 12:00Sat
 02.15
@@ -100,8 +100,8 @@ H.P
 4
 core
 Art
-39
-1234/
+40
+n
 4231
 19:00Wed
 03.13
@@ -130,8 +130,8 @@ F.B
 3
 general
 Literature
-150
-n
+149
+402131241/
 2323
 12:00Sun
 02.10
@@ -150,8 +150,8 @@ A.C
 4
 core
 Literature
-50
-n
+49
+402131241/
 2121
 16:00Sat
 03.04
@@ -160,11 +160,7 @@ S.R
 3
 core
 Literature
-50
-n
+49
+402131241/
 402131241:1234
-Calculus I/Creative Writing/
-123:123
-Calculus I/
-1234:1234
-History/Fine Arts/
+English Literature/Modern Poetry/Philosophy/Creative Writing/

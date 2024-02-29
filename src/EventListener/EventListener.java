@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
 import Course.Course;
 import DataBase.DataBase;
-import Faculty.Faculty;
 import Faculty.Math;
 import Faculty.Physics;
 import Faculty.Art;

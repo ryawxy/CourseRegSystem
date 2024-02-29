@@ -17,13 +17,10 @@ public class DataBase {
     public DataBase() {
 
     }
-
     private static final HashMap<String, String> users = new HashMap<>();
 
 
     private static final List<User> registeredUsers = new ArrayList<>();
-
-    private User LoggedInUser;
 
     public void initialUsers() {
         users.put("402131241", "1234");
@@ -32,14 +29,6 @@ public class DataBase {
 
     public HashMap<String, String> getUsers() {
         return users;
-    }
-
-    public User getLoggedInUser() {
-        return LoggedInUser;
-    }
-
-    public void setLoggedInUser(User loggedInUser) {
-        LoggedInUser = loggedInUser;
     }
 
     public boolean alreadyExists(String studentNumber) {
@@ -406,18 +395,6 @@ public class DataBase {
         }
         return false;
     }
-    public String toString(Faculty faculty){
-        if (faculty.equals(Math.getMath())){
-            return "Math";
-        }else if (faculty.equals(Physics.getPhysics())){
-            return "Physics";
-        }else if (faculty.equals(Art.getArt())){
-            return "Art";
-        }else if (faculty.equals(Literature.getLiterature())){
-            return "Literature";
-        }
-        return  null;
-    }
     public Course find(String name){
         for(Course course : Math.getMath().getMathCourses()){
             if(course.getName().equals(name)){
@@ -438,6 +415,4 @@ public class DataBase {
         }
         return null;
     }
-
-
 }
