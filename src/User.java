@@ -62,6 +62,29 @@ public class User {
     }
     public void removeCourse(Course course){
         registeredCourses.remove(course);
+        if(course.getFaculty().equals("Math")){
+
+            int newStorage = Math.getMath().getStorage().get(course)+1;
+
+            Math.getMath().getStorage().replace(course,newStorage);
+
+        }
+        if(course.getFaculty().equals("Physics")){
+            int newStorage = Physics.getPhysics().getStorage().get(course)+1;
+
+            Physics.getPhysics().getStorage().replace(course,newStorage);
+        }
+        if(course.getFaculty().equals("Art")){
+            int newStorage = Art.getArt().getStorage().get(course)+1;
+
+            Art.getArt().getStorage().replace(course,newStorage);
+        }
+        if(course.getFaculty().equals("Literature")){
+            int newStorage = Literature.getLiterature().getStorage().get(course)+1;
+
+            Literature.getLiterature().getStorage().replace(course,newStorage);
+        }
+
     }
 
 
