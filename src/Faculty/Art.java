@@ -20,10 +20,10 @@ public class Art extends Faculty {
 
     @Override
     public void initialCourses() {
-        Course course1 = new GeneralCourse("1322","10:20Sun","02.24","History","F.B",150,2,"general");
-        Course course2 = new CoreCourse("2124","12:00Sat","02.15","Fine Arts","H.P",40,4,"core");
-        Course course3 = new CoreCourse("4231","19:00Wed","03.13","Graphic Design","A.A",80,3,"core");
-        Course course4 = new CoreCourse("2112","9:00Sat","03.27","Performing Arts","J.P",70,4,"core");
+        Course course1 = new GeneralCourse("1322","10:20Sun","02.24","History","F.B",2,"general","Art");
+        Course course2 = new CoreCourse("2124","12:00Sat","02.15","Fine Arts","H.P",4,"core","Art");
+        Course course3 = new CoreCourse("4231","19:00Wed","03.13","Graphic Design","A.A",3,"core","Art");
+        Course course4 = new CoreCourse("2112","9:00Sat","03.27","Performing Arts","J.P",4,"core","Art");
         artCourse.add(course1);
         storage.put(course1,150);
         artCourse.add(course2);
