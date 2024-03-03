@@ -177,13 +177,11 @@ DataBase dataBase = new DataBase();
 
     }
 
-    public void importFile() throws FileNotFoundException {
+    public void importFile(String path) throws FileNotFoundException {
 
         try {
-            File file = new File("save.txt");
-            String absolute = file.getAbsolutePath();
-            File file1 = new File(absolute);
-            Scanner sc = new Scanner(file1);
+            File file = new File(path);
+            Scanner sc = new Scanner(file);
 
             int lineNumber = 1;
             int level = 1;
@@ -208,7 +206,7 @@ DataBase dataBase = new DataBase();
             String[] userNames = (String[]) new ArrayList<>().toArray(new String[0]);
 
             int i = 0;
-            if (file1.exists()) {
+            if (file.exists()) {
                 Math.getMath().getMathCourses().clear();
                 Physics.getPhysics().getPhysicsCourses().clear();
                 Art.getArt().getArtCourses().clear();

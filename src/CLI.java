@@ -8,6 +8,7 @@ import User.UserType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CLI {
@@ -37,6 +38,8 @@ public class CLI {
     private Course currentCourse = null;
 
     private final EventListener eventListener = new EventListener();
+
+    private final HashMap<String , String> info = new HashMap<>();
 
     public CLI(Logic logic) {
 
@@ -351,6 +354,7 @@ public class CLI {
                             level = 1;
                             studentLevel = 1;
                             currentFaculty = null;
+                            level3 = 1;
                             init();
 
                         }
@@ -465,7 +469,9 @@ public class CLI {
                 switch (option){
 
                     case "1" :
-                        eventListener.importFile();
+                        System.out.println("Please enter the absolute path of the file, you want to import from.");
+                        String path1 = sc.next();
+                        eventListener.importFile(path1);
                         System.out.println("Data imported successfully.");
                         break;
 
@@ -616,22 +622,16 @@ public class CLI {
                     init();
                 }
 
-                String code = "";
-                String name = "";
-                String type = "";
-                String tName = "";
-                String cTime = "";
-                String eTime = "";
-                String storage = "";
-                String credit = "";
-
                 switch (option) {
 
                     case "1":
                         level5 = 1;
                         if(level4 == 0) {
                             System.out.println("Please enter code of the course.");
-                             code = sc.next();
+                          String code = sc.next();
+                          if (!code.equals("back") && !code.equals("exit")) {
+                              info.put("code", code);
+                          }
                             level4 = 1;
 
                             if (code.equals("back")) {
@@ -651,8 +651,12 @@ public class CLI {
                         if(level4 ==1) {
 
                             System.out.println("Please enter name of the course.");
-                             name = sc.next();
+                             String name = sc.next();
+                            if (!name.equals("back") && !name.equals("exit")) {
+                                info.put("name", name);
+                            }
                             level4 = 2;
+
 
                             if (name.equals("back")) {
                                 adminLevel = 3;
@@ -673,8 +677,13 @@ public class CLI {
                         if(level4 == 2) {
 
                             System.out.println("Please enter type of the course.");
-                             type = sc.next();
+                            String type = sc.next();
+
+                            if (!type.equals("back") && !type.equals("exit")) {
+                                info.put("type", type);
+                            }
                             level4 = 3;
+
 
                             if (type.equals("back")) {
                                 adminLevel = 3;
@@ -694,8 +703,14 @@ public class CLI {
                         if(level4 == 3) {
 
                             System.out.println("Please enter teachers name of the course.");
-                             tName = sc.next();
+                             String tName = sc.next();
+
+                            if (!tName.equals("back") && !tName.equals("exit")) {
+                                info.put("tName", tName);
+                            }
                             level4 = 4;
+
+
 
                             if (tName.equals("back")) {
                                 adminLevel = 3;
@@ -715,7 +730,12 @@ public class CLI {
                         if(level4 == 4) {
 
                             System.out.println("Please enter class time of the course.");
-                             cTime = sc.next();
+                           String cTime = sc.next();
+
+                            if (!cTime.equals("back") && !cTime.equals("exit")) {
+                                info.put("cTime", cTime);
+                            }
+
                             level4 = 5;
 
                             if (cTime.equals("back")) {
@@ -736,7 +756,12 @@ public class CLI {
                         if(level4 == 5) {
 
                             System.out.println("Please enter exam time of the course.");
-                             eTime = sc.next();
+                           String  eTime = sc.next();
+
+                            if (!eTime.equals("back") && !eTime.equals("exit")) {
+                                info.put("eTime", eTime);
+                            }
+
                             level4 = 6;
 
                             if (eTime.equals("back")) {
@@ -757,7 +782,23 @@ public class CLI {
                         if(level4 ==6) {
 
                             System.out.println("Please enter storage of the course.");
-                            storage = sc.next();
+                           String storage = sc.next();
+
+                            if (!storage.equals("back") && !storage.equals("exit")) {
+
+                                try{
+                                    int storage2 = Integer.parseInt(storage);
+                                }catch (NumberFormatException e){
+                                    System.out.println("Invalid input.Please try again.");
+                                    adminLevel = 3;
+                                    level = 3;
+                                    level4 = 6;
+                                    init();
+                                }
+                                info.put("storage", storage);
+                            }
+
+
                             level4 = 7;
 
                             if (storage.equals("back")) {
@@ -778,7 +819,20 @@ public class CLI {
                         if(level4 ==7) {
 
                             System.out.println("Please enter credit of the course.");
-                             credit = sc.next();
+                            String credit = sc.next();
+
+                            if (!credit.equals("back") && !credit.equals("exit")) {
+                                try{
+                                    int credit2 = Integer.parseInt(credit);
+                                }catch (NumberFormatException e){
+                                    System.out.println("Invalid input.Please try again.");
+                                    adminLevel = 3;
+                                    level = 3;
+                                    level4 = 7;
+                                    init();
+                                }
+                                info.put("credit", credit);
+                            }
                             level4 = 8;
 
                             if (credit.equals("back")) {
@@ -797,8 +851,10 @@ public class CLI {
                             }
                         }
 
-                        dataBase.addCourse(code, type, tName, cTime, eTime, storage, credit, currentFaculty, name);
-                        System.out.println("Course:"+name+"created successfully.");
+                        dataBase.addCourse(info.get("code"), info.get("type"), info.get("tName"),
+                                info.get("cTime"), info.get("eTime"), info.get("storage"),
+                                info.get("credit"), currentFaculty,info.get("name"));
+                        System.out.println("Course:"+info.get("name")+" created successfully.");
                         level5 = 0;
                         level4 = 0;
                         break;
@@ -874,7 +930,7 @@ public class CLI {
                         }
 
                         Course course1 = dataBase.findCourse(currentFaculty,chosenCourse2);
-                        System.out.println("please enter the number of storage you want to add.");
+                        System.out.println("Please enter the number of storage you want to add.");
                         level5 = 4;
                         String num = sc.next();
                         if(num.equals("back")){
