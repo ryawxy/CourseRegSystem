@@ -22,7 +22,6 @@ public class EventListener {
 DataBase dataBase = new DataBase();
     public void export(String string) throws IOException {
 
-
         File file = new File(string);
 
         PrintWriter writer = new PrintWriter(file);
@@ -207,40 +206,41 @@ DataBase dataBase = new DataBase();
 
             int i = 0;
             if (file.exists()) {
-                Math.getMath().getMathCourses().clear();
-                Physics.getPhysics().getPhysicsCourses().clear();
-                Art.getArt().getArtCourses().clear();
-                Literature.getLiterature().getLiteratureCourses().clear();
-                DataBase.getRegisteredUsers().clear();
-                dataBase.getUsers().clear();
+                if (file.length() != 0) {
+                    Math.getMath().getMathCourses().clear();
+                    Physics.getPhysics().getPhysicsCourses().clear();
+                    Art.getArt().getArtCourses().clear();
+                    Literature.getLiterature().getLiteratureCourses().clear();
+                    DataBase.getRegisteredUsers().clear();
+                    dataBase.getUsers().clear();
 
-                while (sc.hasNextLine() && lineNumber <= 4) {
-                    String s = sc.nextLine();
-                    if (level1 == 1) {
-                        math = Integer.parseInt(s);
-                        faculty1[0] = math;
-                    } else if (level1 == 2) {
-                        physics = Integer.parseInt(s);
-                        faculty1[1] = physics;
-                    } else if (level1 == 3) {
-                        art = Integer.parseInt(s);
-                        faculty1[2] = art;
-                    } else if (level1 == 4) {
-                        literature = Integer.parseInt(s);
-                        faculty1[3] = literature;
+                    while (sc.hasNextLine() && lineNumber <= 4) {
+                        String s = sc.nextLine();
+                        if (level1 == 1) {
+                            math = Integer.parseInt(s);
+                            faculty1[0] = math;
+                        } else if (level1 == 2) {
+                            physics = Integer.parseInt(s);
+                            faculty1[1] = physics;
+                        } else if (level1 == 3) {
+                            art = Integer.parseInt(s);
+                            faculty1[2] = art;
+                        } else if (level1 == 4) {
+                            literature = Integer.parseInt(s);
+                            faculty1[3] = literature;
+                        }
+                        level1++;
+                        lineNumber++;
+                        if (level1 == 5) {
+                            lineNumber = 1;
+                            break;
+                        }
                     }
-                    level1++;
-                    lineNumber++;
-                    if(level1 == 5){
-                        lineNumber = 1;
-                        break;
-                    }
-                }
-                int line = 10*(math+physics+art+literature);
-                if (faculty1[i] != 0) {
+                    int line = 10 * (math + physics + art + literature);
+                    if (faculty1[i] != 0) {
 
 
-                        while (sc.hasNextLine() && lineNumber <= faculty1[i] * 10 && stop<line ) {
+                        while (sc.hasNextLine() && lineNumber <= faculty1[i] * 10 && stop < line) {
 
                             String s = sc.nextLine();
                             if (level % 10 == 1) {
@@ -269,8 +269,6 @@ DataBase dataBase = new DataBase();
                                 }
 
                             }
-
-
                             if (level % 10 == 0) {
                                 Course course = new Course(code, cTime, eTime, name, teacher, Integer.parseInt(credit), type, faculty);
                                 level2++;
@@ -283,16 +281,14 @@ DataBase dataBase = new DataBase();
                                         for (String users : userNames) {
                                             valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
-                                                if(user2.getUsername().equals(users)){
+                                                if (user2.getUsername().equals(users)) {
                                                     valid = false;
                                                     course.getRegisteredUsers().add(user2);
                                                 }
 
                                             }
                                         }
-
-
-                                        if(valid) {
+                                        if (valid) {
                                             for (String users : userNames) {
                                                 User user = new User(users, UserType.STUDENT);
                                                 course.getRegisteredUsers().add(user);
@@ -315,7 +311,7 @@ DataBase dataBase = new DataBase();
                                         for (String users : userNames) {
                                             valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
-                                                if(user2.getUsername().equals(users)){
+                                                if (user2.getUsername().equals(users)) {
                                                     valid = false;
                                                     course.getRegisteredUsers().add(user2);
                                                 }
@@ -324,13 +320,13 @@ DataBase dataBase = new DataBase();
                                         }
 
 
-                                            if(valid) {
-                                                for (String users : userNames) {
-                                                    User user = new User(users, UserType.STUDENT);
-                                                    course.getRegisteredUsers().add(user);
-                                                    DataBase.getRegisteredUsers().add(user);
-                                                }
+                                        if (valid) {
+                                            for (String users : userNames) {
+                                                User user = new User(users, UserType.STUDENT);
+                                                course.getRegisteredUsers().add(user);
+                                                DataBase.getRegisteredUsers().add(user);
                                             }
+                                        }
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();
@@ -345,7 +341,7 @@ DataBase dataBase = new DataBase();
                                         for (String users : userNames) {
                                             valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
-                                                if(user2.getUsername().equals(users)){
+                                                if (user2.getUsername().equals(users)) {
                                                     valid = false;
                                                     course.getRegisteredUsers().add(user2);
                                                 }
@@ -354,7 +350,7 @@ DataBase dataBase = new DataBase();
                                         }
 
 
-                                        if(valid) {
+                                        if (valid) {
                                             for (String users : userNames) {
                                                 User user = new User(users, UserType.STUDENT);
                                                 course.getRegisteredUsers().add(user);
@@ -375,7 +371,7 @@ DataBase dataBase = new DataBase();
                                         for (String users : userNames) {
                                             valid = true;
                                             for (User user2 : DataBase.getRegisteredUsers()) {
-                                                if(user2.getUsername().equals(users)){
+                                                if (user2.getUsername().equals(users)) {
                                                     valid = false;
                                                     course.getRegisteredUsers().add(user2);
                                                 }
@@ -384,7 +380,7 @@ DataBase dataBase = new DataBase();
                                         }
 
 
-                                        if(valid) {
+                                        if (valid) {
                                             for (String users : userNames) {
                                                 User user = new User(users, UserType.STUDENT);
                                                 course.getRegisteredUsers().add(user);
@@ -403,7 +399,7 @@ DataBase dataBase = new DataBase();
                             level++;
                             stop++;
                             if (level2 == faculty1[i]) {
-                                if(i<=2) {
+                                if (i <= 2) {
                                     i++;
                                 }
                                 lineNumber = 1;
@@ -414,61 +410,59 @@ DataBase dataBase = new DataBase();
                         }
 
                     }
-                level = 1;
-                lineNumber = 1;
+                    level = 1;
+                    lineNumber = 1;
 
-                String [] userPassword = new String[2];
-                String course2 = "";
-                String[] course = (String[]) new ArrayList<>().toArray(new String[0]);
+                    String[] userPassword = new String[2];
+                    String course2 = "";
+                    String[] course = (String[]) new ArrayList<>().toArray(new String[0]);
 
-                while (sc.hasNextLine() && lineNumber<=2){
-                    String s = sc.nextLine();
+                    while (sc.hasNextLine() && lineNumber <= 2) {
+                        String s = sc.nextLine();
 
 
+                        if (level == 1) {
+                            userPassword = s.split(":");
 
-                    if(level  == 1){
-                        userPassword = s.split(":");
-
-                    }else if(level  == 2) {
-                        if (!s.equals("n")) {
-                            course = s.split("/");
-                        } else {
-                            course2 = "n";
+                        } else if (level == 2) {
+                            if (!s.equals("n")) {
+                                course = s.split("/");
+                            } else {
+                                course2 = "n";
+                            }
                         }
-                    }
 
 
+                        if (level == 2) {
+                            dataBase.getUsers().put(userPassword[0], userPassword[1]);
+
+                            if (!course2.equals("n")) {
+                                for (String string : course) {
+                                    Course course1 = dataBase.find(string);
+                                    for (User user2 : course1.getRegisteredUsers()) {
+                                        if (user2.getUsername().equals(userPassword[0])) {
+                                            user2.getRegisteredCourses().add(course1);
 
 
-                    if(level == 2) {
-                        dataBase.getUsers().put(userPassword[0], userPassword[1]);
-
-                        if (!course2.equals("n")){
-                            for (String string : course) {
-                                Course course1 = dataBase.find(string);
-                                for(User user2 : course1.getRegisteredUsers()){
-                                    if(user2.getUsername().equals(userPassword[0])){
-                                        user2.getRegisteredCourses().add(course1);
-                                      //  DataBase.getRegisteredUsers().add(user2);
-
+                                        }
                                     }
                                 }
+                            } else {
+                                User user = new User(userPassword[0], UserType.STUDENT);
+                                DataBase.getRegisteredUsers().add(user);
                             }
-                    }else {
-                            User user = new User(userPassword[0], UserType.STUDENT);
-                            DataBase.getRegisteredUsers().add(user);
+                            level = 1;
+                            lineNumber = 1;
+                        } else {
+                            level++;
+                            lineNumber++;
                         }
-                        level = 1;
-                        lineNumber = 1;
-                    }else {
-                        level++;
-                        lineNumber++;
+
+
                     }
 
 
                 }
-
-
             }
         }catch (NumberFormatException e){
 

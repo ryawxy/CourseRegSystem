@@ -262,10 +262,10 @@ public class DataBase {
 
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Invalid input.Please try again.");
+           //     System.out.println("Invalid input.Please try again.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid input.Please try again.");
+        //    System.out.println("Invalid input.Please try again.");
         }
         return null;
     }
@@ -353,6 +353,7 @@ public class DataBase {
 
 
                 for (Course course1 : user.getRegisteredCourses()) {
+
                     if (course1.getClassTime().equals(course.getClassTime())) {
                         valid2 = false;
                         System.out.println("Cant add this course.Another class on this time. ");

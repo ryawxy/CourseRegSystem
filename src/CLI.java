@@ -188,11 +188,12 @@ public class CLI {
 
                     switch (option) {
                         case "1":
+                            level3 = 1;
                             System.out.println("choose a faculty.\n1-Math\n2-Physics\n3-Art\n4-Literature");
 
 
                             level++;
-                            level3 = 1;
+
                             level2++;
 
                             break;
@@ -254,12 +255,13 @@ public class CLI {
                     }
                 }
             }
-            level3 = 0;
+         //   level3 = 0;
         }
         if(currentUser!=null) {
             if (studentLevel == 1 && currentUser.getUserType().equals(UserType.STUDENT)) {
                 if (level == 2) {
                     String faculty = sc.next();
+
 
                     switch (faculty) {
                         case "1":
@@ -367,10 +369,12 @@ public class CLI {
                             init();
                         }
                         Course course = dataBase.findCourse(currentFaculty, chosenCourse);
-                        if (dataBase.regRules(currentUser, course)) {
-                            currentUser.addCourse(course, currentUser);
+                        if(course!=null) {
+                            if (dataBase.regRules(currentUser, course)) {
+                                currentUser.addCourse(course, currentUser);
 
-                            System.out.println("Course added successfully");
+                                System.out.println("Course added successfully");
+                            }
                         }
 
 
@@ -471,17 +475,50 @@ public class CLI {
                     case "1" :
                         System.out.println("Please enter the absolute path of the file, you want to import from.");
                         String path1 = sc.next();
-                        eventListener.importFile(path1);
-                        System.out.println("Data imported successfully.");
+
+                        if(path1.equals("back")){
+                            adminLevel = 1;
+                            level = 1;
+                            init();
+                        }
+                        if (path1.equals("exit")){
+                            adminLevel=0;
+                            currentUser=null;
+                            currentFaculty=null;
+                            studentLevel=0;
+                            level=0;
+                            init();
+                        }
+                        File file = new File(path1);
+                        if(!file.exists()){
+                            System.out.println("No such file exists.");
+                        }else {
+
+                            eventListener.importFile(path1);
+                            System.out.println("Data imported successfully.");
+                        }
                         break;
 
                     case "2" :
 
                         System.out.println("Please enter the absolute path of a file. ");
                         String path = sc.next();
-                        File file = new File(path);
+                        if(path.equals("back")){
+                            adminLevel = 1;
+                            level = 1;
+                            init();
+                        }
+                        if (path.equals("exit")){
+                            adminLevel=0;
+                            currentUser=null;
+                            currentFaculty=null;
+                            studentLevel=0;
+                            level=0;
+                            init();
+                        }
+                        File file1 = new File(path);
 
-                        if(!file.exists()){
+                        if(!file1.exists()){
                             System.out.println("No such file exists.");
                         }else {
 
@@ -607,6 +644,12 @@ public class CLI {
                 }
                 if(level5 ==4){
                     option ="4";
+                }
+                if(level5 ==2){
+                    option ="2";
+                }
+                if(level5 ==3){
+                    option ="3";
                 }
 
                 if(option.equals("back")){
@@ -861,13 +904,15 @@ public class CLI {
 
 
                     case "2" :
-
+                        level5 = 2;
                         System.out.println("Please choose a course to remove.");
                         String chosenCourse1 = sc.next();
 
                         if(chosenCourse1.equals("back")){
                             adminLevel =3;
                             level = 3;
+                            level5 = 0;
+                            level4 = 0;
                             init();
                         }
                         if(chosenCourse1.equals("exit")){
@@ -875,23 +920,30 @@ public class CLI {
                             level = 0;
                             currentUser = null;
                             level5 = 0;
+                            level4 = 0;
                             init();
                         }
                         Course course2 = dataBase.findCourse(currentFaculty , chosenCourse1);
 
-                        dataBase.removeCourse(currentFaculty,course2);
+                        if(course2==null){
+                            init();
+                        }else {
+                            dataBase.removeCourse(currentFaculty, course2);
+                        }
 
                         break;
 
 
                     case "3":
-
+                        level5 = 3;
                         System.out.println("Choose a course to see the details.");
                         String chosenCourse = sc.next();
                         currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
                         if(chosenCourse.equals("back")){
                             adminLevel = 3;
                             level = 3;
+                            level5 = 0;
+                            level4 = 0;
                             init();
                         }
                         if(chosenCourse.equals("exit")){
@@ -901,24 +953,32 @@ public class CLI {
                             currentUser = null;
                             currentFaculty = null;
                             level5 = 0;
+                            level4 = 0;
                             init();
                         }
 
+                        if(currentCourse != null && !chosenCourse.equals("back") && !chosenCourse.equals("exit")) {
+                            System.out.println("List of registered students for this course:");
 
-                        System.out.println("List of registered students for this course:");
+                            System.out.println(dataBase.showDetails(currentFaculty, chosenCourse));
+                            adminLevel++;
+                            level++;
+                        }
+                        else {
 
-                        System.out.println(dataBase.showDetails(currentFaculty, chosenCourse));
-                        adminLevel++;
-                        level++;
-                        break;
+                            init();
+                        }
+                            break;
 
                     case "4" :
+                        level5 = 4;
                         System.out.println("Choose a course to add storage to.");
                         String chosenCourse2 = sc.next();
 
                         if(chosenCourse2.equals("back")){
                             adminLevel =3;
                             level = 3;
+                            level5 = 0;
                             init();
                         }
                         if(chosenCourse2.equals("exit")){
@@ -926,10 +986,14 @@ public class CLI {
                             level = 0;
                             currentUser = null;
                             level5 = 0;
+                            level4 = 0;
                             init();
                         }
 
                         Course course1 = dataBase.findCourse(currentFaculty,chosenCourse2);
+                        if(course1 == null){
+                            init();
+                        }
                         System.out.println("Please enter the number of storage you want to add.");
                         level5 = 4;
                         String num = sc.next();
@@ -946,9 +1010,11 @@ public class CLI {
                         }
 
                         try {
-                            int add = Integer.parseInt(num);
-                            dataBase.addStorage(currentFaculty, course1, add);
-                            System.out.println("Storage added successfully.");
+                            if(course1 != null) {
+                                int add = Integer.parseInt(num);
+                                dataBase.addStorage(currentFaculty, course1, add);
+                                System.out.println("Storage added successfully.");
+                            }
                         }catch (NumberFormatException e){
 
                         }
@@ -957,6 +1023,8 @@ public class CLI {
                     case "back":
                         adminLevel = 2;
                         level = 2;
+                        level4 = 0;
+                        level5 = 0;
                         init();
 
                     case "exit":
@@ -967,6 +1035,7 @@ public class CLI {
                         currentFaculty = null;
                         currentCourse=null;
                         level5 = 0;
+                        level4 = 0;
                         init();
                     default:
                         System.out.println("Invalid input. Please try again.");
@@ -1038,6 +1107,8 @@ public class CLI {
                         studentLevel=0;
                         currentCourse=null;
                         currentFaculty = null;
+                        level5 = 0;
+                        level4 = 0;
                         init();
 
                     case "back":

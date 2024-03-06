@@ -1,4 +1,4 @@
-5
+4
 4
 4
 4
@@ -40,18 +40,8 @@ C.S
 4
 core
 Math
-50
-n
-2
-2
-2
-2
-3
-2
-2
-Math
-1
-123/
+49
+402131241/
 1243
 10:30Mon
 03.24
@@ -173,6 +163,6 @@ Literature
 50
 n
 402131241:1234
-Calculus I/Linear Algebra/Topology I/
+Calculus I/Linear Algebra/Topology I/Complex Analysis I/
 123:123
-Calculus I/2/
+Calculus I/
