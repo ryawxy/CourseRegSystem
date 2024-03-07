@@ -287,14 +287,14 @@ DataBase dataBase = new DataBase();
                                                 }
 
                                             }
-                                        }
-                                        if (valid) {
-                                            for (String users : userNames) {
-                                                User user = new User(users, UserType.STUDENT);
-                                                course.getRegisteredUsers().add(user);
-                                                DataBase.getRegisteredUsers().add(user);
+
+                                            if (valid) {
+                                                    User user = new User(users, UserType.STUDENT);
+                                                    course.getRegisteredUsers().add(user);
+                                                    DataBase.getRegisteredUsers().add(user);
+                                                }
                                             }
-                                        }
+
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();
@@ -317,16 +317,16 @@ DataBase dataBase = new DataBase();
                                                 }
 
                                             }
-                                        }
 
 
-                                        if (valid) {
-                                            for (String users : userNames) {
-                                                User user = new User(users, UserType.STUDENT);
-                                                course.getRegisteredUsers().add(user);
-                                                DataBase.getRegisteredUsers().add(user);
+                                            if (valid) {
+
+                                                    User user = new User(users, UserType.STUDENT);
+                                                    course.getRegisteredUsers().add(user);
+                                                    DataBase.getRegisteredUsers().add(user);
+                                                }
                                             }
-                                        }
+
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();
@@ -347,16 +347,16 @@ DataBase dataBase = new DataBase();
                                                 }
 
                                             }
-                                        }
 
 
-                                        if (valid) {
-                                            for (String users : userNames) {
-                                                User user = new User(users, UserType.STUDENT);
-                                                course.getRegisteredUsers().add(user);
-                                                DataBase.getRegisteredUsers().add(user);
+                                            if (valid) {
+
+                                                    User user = new User(users, UserType.STUDENT);
+                                                    course.getRegisteredUsers().add(user);
+                                                    DataBase.getRegisteredUsers().add(user);
+                                                }
                                             }
-                                        }
+
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();
@@ -377,16 +377,15 @@ DataBase dataBase = new DataBase();
                                                 }
 
                                             }
-                                        }
 
+                                            if (valid) {
 
-                                        if (valid) {
-                                            for (String users : userNames) {
-                                                User user = new User(users, UserType.STUDENT);
-                                                course.getRegisteredUsers().add(user);
-                                                DataBase.getRegisteredUsers().add(user);
+                                                    User user = new User(users, UserType.STUDENT);
+                                                    course.getRegisteredUsers().add(user);
+                                                    DataBase.getRegisteredUsers().add(user);
+                                                }
                                             }
-                                        }
+
                                         userNames = (String[]) new ArrayList<>().toArray(new String[0]);
                                     } else {
                                         course.getRegisteredUsers().clear();

@@ -375,7 +375,11 @@ public class CLI {
 
                                 System.out.println("Course added successfully");
                             }
-                        }
+                            }else{
+                           //     System.out.println("Invalid input.Please try again.");
+                                init();
+                            }
+
 
 
                     } catch (NumberFormatException e) {
@@ -446,20 +450,9 @@ public class CLI {
                     }
 
                 } catch (NumberFormatException e) {
-                    if (removedCourse.equals("back")) {
-                        level = 1;
-                        studentLevel = 1;
-                        currentFaculty = null;
-                        init();
-                    }
-                    if (removedCourse.equals("exit")) {
-                        level = 0;
-                        studentLevel = 0;
-                        currentFaculty = null;
-                        currentUser = null;
-                        currentCourse = null;
-                        init();
-                    }
+
+                    System.out.println("Invalid input.Please try again.");
+                    init();
 
                 }
                 init();

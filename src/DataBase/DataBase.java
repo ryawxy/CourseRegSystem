@@ -162,7 +162,9 @@ public class DataBase {
     }
 
     public void removeCourse(Faculty faculty, Course course) {
+
         try {
+
             if (course != null) {
                 if (faculty.equals(Math.getMath())) {
                     Math.getMath().getMathCourses().remove(course);
@@ -200,7 +202,7 @@ public class DataBase {
                 }
                 System.out.println("Course removed successfully.");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             System.out.println("Invalid input.Please try again.");
         }
     }
@@ -258,7 +260,7 @@ public class DataBase {
                         }
                     }
                 } catch (NumberFormatException e) {
-
+                    System.out.println("Invalid input.Please try again.");
 
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
