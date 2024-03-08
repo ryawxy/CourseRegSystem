@@ -1,4 +1,4 @@
-4
+3
 4
 4
 4
@@ -10,18 +10,8 @@ A.B
 4
 general
 Math
-200
-n
-4502
-15:00Sat
-03.19
-Linear Algebra
-K.P
-3
-core
-Math
-57
-402131241/123/12/
+197
+402131241/12/43/
 2312
 16:00Wed
 03.15
@@ -30,8 +20,8 @@ L.C
 4
 core
 Math
-48
-123/12/
+49
+43/
 7237
 9:00Mon
 03.17
@@ -51,7 +41,7 @@ F.P
 general
 Physics
 199
-402131241/
+123/
 2124
 16:00Sat
 03.18
@@ -60,8 +50,8 @@ L.T
 3
 core
 Physics
-60
-n
+59
+123/
 4234
 17:00Wed
 03.14
@@ -70,8 +60,8 @@ L.C
 3
 core
 Physics
-72
-n
+68
+12/43/
 4567
 9:00Mon
 03.17
@@ -80,8 +70,8 @@ J.H
 4
 core
 Physics
-59
-402131241/
+57
+123/12/43/
 1322
 10:20Sun
 02.24
@@ -90,8 +80,8 @@ F.B
 2
 general
 Art
-148
-402131241/123/
+150
+n
 2124
 12:00Sat
 02.15
@@ -100,8 +90,8 @@ H.P
 4
 core
 Art
-39
-402131241/
+38
+402131241/43/
 4231
 19:00Wed
 03.13
@@ -110,8 +100,8 @@ A.A
 3
 core
 Art
-79
-12/
+78
+402131241/12/
 2112
 9:00Sat
 03.27
@@ -120,8 +110,8 @@ J.P
 4
 core
 Art
-69
-402131241/
+70
+n
 1361
 10:20Wed
 02.22
@@ -130,8 +120,8 @@ F.B
 3
 general
 Literature
-149
-12/
+150
+n
 2323
 12:00Sun
 02.10
@@ -141,7 +131,7 @@ H.M
 core
 Literature
 29
-12/
+123/
 4231
 8:00Wed
 03.09
@@ -150,8 +140,8 @@ A.C
 4
 core
 Literature
-50
-n
+49
+123/
 2121
 16:00Sat
 03.04
@@ -160,11 +150,13 @@ S.R
 3
 core
 Literature
-49
-123/
+50
+n
 402131241:1234
-Basic Physics/Astronomy/Linear Algebra/Fine Arts/Performing Arts/History/
+Calculus I/Fine Arts/Graphic Design/
 123:123
-Topology I/Linear Algebra/History/Modern Poetry/
+Basic Physics/Quantum Mechanics/Astronomy/Creative Writing/Philosophy/
 12:12
-Linear Algebra/Topology I/English Literature/Creative Writing/Graphic Design/
+Calculus I/Biological Physics/Astronomy/Graphic Design/
+43:43
+Calculus I/Topology I/Astronomy/Biological Physics/Fine Arts/

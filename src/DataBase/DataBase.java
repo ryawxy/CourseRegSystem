@@ -234,26 +234,26 @@ public class DataBase {
 
                 try {
                     if (faculty.equals(Math.getMath())) {
-                        if (Integer.parseInt(number) <= Math.getMath().getMathCourses().size()) {
+                        if (Integer.parseInt(number) <= Math.getMath().getMathCourses().size() && Integer.parseInt(number)>0) {
                             return Math.getMath().getMathCourses().get(Integer.parseInt(number) - 1);
                         } else {
                             System.out.println("Invalid input.Please try again.");
                         }
 
                     } else if (faculty.equals(Physics.getPhysics())) {
-                        if (Integer.parseInt(number) <= Physics.getPhysics().getPhysicsCourses().size()) {
+                        if (Integer.parseInt(number) <= Physics.getPhysics().getPhysicsCourses().size() && Integer.parseInt(number)>0) {
                             return Physics.getPhysics().getPhysicsCourses().get(Integer.parseInt(number) - 1);
                         } else {
                             System.out.println("Invalid input.Please try again.");
                         }
                     } else if (faculty.equals(Art.getArt())) {
-                        if (Integer.parseInt(number) <= Art.getArt().getArtCourses().size()) {
+                        if (Integer.parseInt(number) <= Art.getArt().getArtCourses().size() && Integer.parseInt(number)>0) {
                             return Art.getArt().getArtCourses().get(Integer.parseInt(number) - 1);
                         } else {
                             System.out.println("Invalid input.Please try again.");
                         }
                     } else if (faculty.equals(Literature.getLiterature())) {
-                        if (Integer.parseInt(number) <= Literature.getLiterature().getLiteratureCourses().size()) {
+                        if (Integer.parseInt(number) <= Literature.getLiterature().getLiteratureCourses().size() && Integer.parseInt(number)>0) {
                             return Literature.getLiterature().getLiteratureCourses().get(Integer.parseInt(number) - 1);
                         } else {
                             System.out.println("Invalid input.Please try again.");
