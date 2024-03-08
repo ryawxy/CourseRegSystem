@@ -202,6 +202,10 @@ public class CLI {
                         case "2":
                             if (currentUser.getRegisteredCourses().isEmpty()) {
                                 System.out.println("No courses have been registered.");
+                                studentLevel =1;
+                                level = 1;
+                                level3 = 0;
+                                init();
                             } else {
                                 for (Course course : currentUser.getRegisteredCourses()) {
                                     if (course.getFaculty().equals("Math")) {
@@ -931,7 +935,7 @@ public class CLI {
                         level5 = 3;
                         System.out.println("Choose a course to see the details.");
                         String chosenCourse = sc.next();
-                        currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
+
                         if(chosenCourse.equals("back")){
                             adminLevel = 3;
                             level = 3;
@@ -949,6 +953,7 @@ public class CLI {
                             level4 = 0;
                             init();
                         }
+                        currentCourse = dataBase.findCourse(currentFaculty,chosenCourse);
 
                         if(currentCourse != null && !chosenCourse.equals("back") && !chosenCourse.equals("exit")) {
                             System.out.println("List of registered students for this course:");
@@ -987,6 +992,7 @@ public class CLI {
                         if(course1 == null){
                             init();
                         }
+
                         System.out.println("Please enter the number of storage you want to add.");
                         level5 = 4;
                         String num = sc.next();
@@ -1009,7 +1015,8 @@ public class CLI {
                                 System.out.println("Storage added successfully.");
                             }
                         }catch (NumberFormatException e){
-
+                            System.out.println("Invalid input.Please try again");
+                            init();
                         }
                         break;
 
