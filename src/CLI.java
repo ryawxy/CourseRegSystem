@@ -720,7 +720,17 @@ public class CLI {
                             String type = sc.next();
 
                             if (!type.equals("back") && !type.equals("exit")) {
-                                info.put("type", type);
+                                if (type.equals("general") || type.equals("core")) {
+                                    info.put("type", type);
+                                }
+                            }
+
+                            if(!type.equals("back") && !type.equals("exit") && !type.equals("core") && !type.equals("general")){
+                                System.out.println("Invalid input.Please try again.");
+                                adminLevel = 3;
+                                level = 3;
+                                level4 = 2;
+                                init();
                             }
                             level4 = 3;
 
