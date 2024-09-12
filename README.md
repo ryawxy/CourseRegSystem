@@ -1,1 +1,1 @@
-a java OOP excersize for AP course
+a simulation of course registration system
