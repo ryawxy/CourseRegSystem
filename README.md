@@ -8,11 +8,11 @@
 
 # Features:
 
-## Student registration: ### Add students to the system.
-## Course management: ### Create and update courses with attributes such as course name, instructor, capacity, and prerequisites.
-## Registration process: ### Students can enroll in available courses while ensuring capacity limits and prerequisites are respected.
-## Schedule conflict handling: ### Prevents students from enrolling in courses that have schedule conflicts.
-## Admin functionality: ### Allows admins to manage course offerings, view student enrollments, and resolve conflicts.
+### Student registration: Add students to the system.
+### Course management: Create and update courses with attributes such as course name, instructor, capacity, and prerequisites.
+### Registration process: Students can enroll in available courses while ensuring capacity limits and prerequisites are respected.
+### Schedule conflict handling: Prevents students from enrolling in courses that have schedule conflicts.
+### Admin functionality: Allows admins to manage course offerings, view student enrollments, and resolve conflicts.
 
 # Technologies Used:
 
